@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>الحاسب الذكي</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=Cairo:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#06050a;--bg2:#0d0b14;--bg3:#14121c;--g:#f5c842;--g2:#c47a00;--g3:#8a5000;--gb:rgba(245,200,66,.1);--gd:rgba(245,200,66,.06);--b:rgba(245,200,66,.14);--bh:rgba(245,200,66,.4);--tx:rgba(255,255,255,.88);--mu:rgba(255,255,255,.48);--di:rgba(255,255,255,.22);--gn:#22c55e;--rd:#ef4444;--r:14px}
+body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--tx);overflow-x:hidden}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--g3);border-radius:2px}
+button,input,textarea{font-family:'Tajawal',sans-serif}
+/* NAV */
+.nav{position:sticky;top:0;z-index:900;background:rgba(6,5,10,.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--b);height:60px;display:flex;align-items:center;padding:0 1.5rem;gap:1rem}
+.nav-logo{display:flex;align-items:center;gap:9px;cursor:pointer}
+.nav-logo-i{width:34px;height:34px;background:linear-gradient(135deg,var(--g),var(--g2));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;box-shadow:0 3px 12px rgba(245,200,66,.28)}
+.nav-brand{font-family:'Cairo',sans-serif;font-weight:900;font-size:17px}
+.nav-brand .a{color:#fff}.nav-brand .b{color:var(--g)}
+.nav-c{flex:1;display:flex;justify-content:center;gap:1.5rem}
+.nav-c a{color:var(--mu);font-size:13px;cursor:pointer;transition:color .2s}
+.nav-c a:hover{color:var(--g)}
+.nav-r{display:flex;align-items:center;gap:7px}
+.nb{border:none;border-radius:50px;padding:7px 14px;font-size:12.5px;font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:5px}
+.nb-g{background:linear-gradient(135deg,var(--g),var(--g2));color:#06050a}
+.nb-g:hover{box-shadow:0 4px 14px rgba(245,200,66,.38);transform:translateY(-1px)}
+.nb-p{background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff}
+.nb-gh{background:var(--gd);border:1px solid var(--bh);color:var(--g);border-radius:50px;padding:6px 13px;font-size:12.5px;font-weight:700;cursor:pointer;transition:all .2s}
+.cart-b{background:var(--g);color:#06050a;border:none;border-radius:50px;padding:7px 14px;font-weight:800;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all .2s}
+.cart-b:hover{background:#f7d060;box-shadow:0 4px 14px rgba(245,200,66,.4)}
+.cn{background:#06050a;color:var(--g);border-radius:50%;width:18px;height:18px;font-size:10px;display:flex;align-items:center;justify-content:center;font-weight:800}
+.promo{background:linear-gradient(90deg,var(--g3),var(--g),var(--g2),var(--g),var(--g3));padding:.42rem;text-align:center;font-weight:700;font-size:12.5px;color:#06050a}
+.promo code{background:#06050a;color:var(--g);padding:1px 8px;border-radius:4px}
+/* HERO */
+.hero{min-height:86vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse 80% 55% at 50% -5%,rgba(245,200,66,.09),transparent 55%);position:relative;overflow:hidden}
+.h-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(245,200,66,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(245,200,66,.03) 1px,transparent 1px);background-size:55px 55px;mask-image:radial-gradient(ellipse at center,black 25%,transparent 70%)}
+.h-inner{text-align:center;padding:2rem 1.5rem 2.5rem;position:relative;z-index:2;max-width:600px}
+.h-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(245,200,66,.08);border:1px solid rgba(245,200,66,.22);border-radius:50px;padding:5px 15px;font-size:11.5px;font-weight:700;color:var(--g);margin-bottom:1.5rem}
+.h-dot{width:6px;height:6px;border-radius:50%;background:var(--gn);box-shadow:0 0 6px var(--gn);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.h-title{font-family:'Cairo',sans-serif;font-weight:900;line-height:1;margin-bottom:1.25rem;overflow:visible}
+.h-title .l1{display:block;font-size:clamp(3rem,8vw,5.5rem);color:#fff;letter-spacing:-1px}
+.h-title .l2{display:block;font-size:clamp(3rem,8vw,5.5rem);letter-spacing:-1px;background:linear-gradient(135deg,var(--g),#ffdd44,var(--g2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding-bottom:.22em;line-height:1.15}
+.h-sub{color:var(--mu);font-size:15px;line-height:1.8;margin-bottom:2.5rem}
+.h-btns{display:flex;flex-direction:column;align-items:center}
+.hb{width:285px;border:none;border-radius:50px;padding:14px;font-size:15px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .28s}
+.hb-g{background:linear-gradient(135deg,var(--g),var(--g2),var(--g3));color:#06050a;box-shadow:0 8px 26px rgba(245,200,66,.35)}
+.hb-g:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 14px 38px rgba(245,200,66,.52)}
+.hb-p{background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff;box-shadow:0 8px 26px rgba(124,58,237,.3)}
+.hb-p:hover{transform:translateY(-2px) scale(1.02)}
+.hb-o{background:transparent;border:1.5px solid rgba(255,255,255,.12);color:var(--mu);width:285px;border-radius:50px;padding:12px;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .28s}
+.hb-o:hover{border-color:var(--bh);color:var(--g)}
+.sep{color:var(--di);font-size:10px;font-weight:600;letter-spacing:2px;margin:10px 0}
+.beta{background:var(--g);color:#06050a;font-size:7px;font-weight:900;padding:2px 5px;border-radius:4px}
+.stats{background:rgba(245,200,66,.04);border-top:1px solid var(--b);border-bottom:1px solid var(--b);padding:.75rem 2rem;display:flex;justify-content:center;gap:3rem;flex-wrap:wrap}
+.sv{color:var(--g);font-family:'Cairo',sans-serif;font-weight:900;font-size:1.3rem;display:block;line-height:1}
+.sl{color:var(--di);font-size:10.5px;display:block;margin-top:2px}
+/* SECTION */
+.sec{max-width:1200px;margin:0 auto;padding:3rem 1.5rem}
+.stag{font-size:10px;font-weight:700;color:var(--g);letter-spacing:2px;text-transform:uppercase;display:block;margin-bottom:.4rem}
+.stitle{font-family:'Cairo',sans-serif;font-weight:900;font-size:1.45rem;color:#fff}
+.ssub{font-size:13px;color:var(--mu);margin-top:.3rem;margin-bottom:1.75rem}
+/* CAT GRID */
+.cg{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+.cc{background:linear-gradient(145deg,var(--bg3),var(--bg2));border:1.5px solid var(--b);border-radius:20px;padding:1.7rem 1rem 1.5rem;text-align:center;cursor:pointer;transition:all .28s cubic-bezier(.34,1.2,.64,1);position:relative;overflow:hidden}
+.cc::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0,rgba(245,200,66,.09),transparent 62%);opacity:0;transition:opacity .28s}
+.cc:hover::before{opacity:1}
+.cc:hover{border-color:var(--bh);transform:translateY(-5px) scale(1.02);box-shadow:0 16px 38px rgba(0,0,0,.44)}
+.cc-ic{width:66px;height:66px;border-radius:50%;background:var(--gd);border:1.5px solid var(--b);display:flex;align-items:center;justify-content:center;margin:0 auto .9rem;font-size:1.9rem;transition:all .28s;position:relative;z-index:1}
+.cc:hover .cc-ic{background:rgba(245,200,66,.16);border-color:var(--bh);transform:scale(1.1)}
+.cc-nm{font-size:13.5px;font-weight:800;color:#fff;display:block;margin-bottom:2px;position:relative;z-index:1}
+.cc-en{font-size:9px;color:var(--di);display:block;margin-bottom:6px;letter-spacing:.3px;position:relative;z-index:1}
+.cc-cnt{font-size:11.5px;color:var(--g);font-weight:700;display:block;position:relative;z-index:1}
+/* BUILDS */
+.builds-bg{background:linear-gradient(180deg,var(--bg) 0%,#090716 50%,var(--bg) 100%);border-top:1px solid var(--b);border-bottom:1px solid var(--b)}
+.btabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:1.5rem}
+.btab{background:rgba(255,255,255,.04);border:1.5px solid var(--b);border-radius:50px;padding:7px 17px;font-size:12.5px;font-weight:700;color:var(--mu);cursor:pointer;transition:all .22s;white-space:nowrap}
+.btab:hover{border-color:var(--bh);color:var(--g)}
+.btab.on{background:var(--gb);border-color:var(--g);color:var(--g);box-shadow:0 0 14px rgba(245,200,66,.12)}
+.bgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;animation:fu .32s ease}
+@keyframes fu{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.bcard{background:linear-gradient(155deg,var(--bg3),var(--bg2));border:1.5px solid var(--b);border-radius:20px;overflow:hidden;transition:all .25s;display:flex;flex-direction:column}
+.bcard:hover{border-color:var(--bh);transform:translateY(-5px);box-shadow:0 18px 42px rgba(0,0,0,.5)}
+.bcard-img{height:160px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.bcard-img svg{width:125px;height:125px;transition:transform .28s}
+.bcard:hover .bcard-img svg{transform:scale(1.07)}
+.bbdg{position:absolute;top:11px;right:11px;font-size:10px;font-weight:800;padding:3px 11px;border-radius:12px;text-transform:uppercase;letter-spacing:.3px}
+.eco{background:rgba(34,197,94,.13);color:#4ade80;border:1px solid rgba(34,197,94,.27)}
+.mid{background:rgba(59,130,246,.13);color:#60a5fa;border:1px solid rgba(59,130,246,.27)}
+.pro{background:rgba(168,85,247,.13);color:#c084fc;border:1px solid rgba(168,85,247,.27)}
+.game{background:rgba(245,200,66,.13);color:var(--g);border:1px solid rgba(245,200,66,.27)}
+.strm{background:rgba(239,68,68,.13);color:#f87171;border:1px solid rgba(239,68,68,.27)}
+.bcard-body{padding:1.2rem;flex:1;display:flex;flex-direction:column}
+.bcard-nm{font-family:'Cairo',sans-serif;font-weight:900;font-size:.97rem;color:#fff;margin-bottom:.65rem}
+.bspecs{display:flex;flex-direction:column;gap:4px;margin-bottom:.85rem}
+.bsp{display:flex;align-items:center;gap:7px;font-size:11px}
+.bsp-i{width:17px;text-align:center;flex-shrink:0}
+.bsp-k{color:var(--mu);font-weight:600;flex-shrink:0;min-width:36px}
+.bsp-v{color:var(--tx);font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bperf-lbl{font-size:9.5px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.35rem}
+.bperf-rows{display:flex;flex-direction:column;gap:3px;margin-bottom:.85rem}
+.bpr{display:flex;align-items:center;gap:6px;font-size:10.5px}
+.bpr-n{color:var(--mu);min-width:52px;flex-shrink:0}
+.bpr-bar{flex:1;height:4px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden}
+.bpr-f{height:100%;border-radius:2px}
+.bpr-p{color:var(--g);font-weight:700;min-width:26px}
+.bcard-price{font-family:'Cairo',sans-serif;font-weight:900;font-size:1.35rem;color:var(--g);margin-bottom:.85rem;margin-top:auto}
+.bcard-price .op{font-size:.78rem;color:var(--di);text-decoration:line-through;font-weight:400;margin-right:5px}
+.sbts{display:flex;flex-direction:column;gap:5px}
+.sl-a{display:flex;align-items:center;justify-content:space-between;border:none;border-radius:8px;padding:9px 12px;font-size:11.5px;font-weight:700;cursor:pointer;transition:all .2s;text-decoration:none}
+.sl-a:hover{transform:scale(1.01);filter:brightness(1.07)}
+.sl-a .sn{display:flex;align-items:center;gap:5px}
+.sl-a .sp{font-size:10px;background:rgba(0,0,0,.25);padding:2px 6px;border-radius:4px}
+.amz{background:linear-gradient(135deg,#ff9900,#cc7700);color:#000}
+.egg{background:linear-gradient(135deg,#1a5276,#0e3a5c);color:#fff}
+.ali{background:linear-gradient(135deg,#e02e24,#a01818);color:#fff}
+/* WHY */
+.why-bg{background:linear-gradient(135deg,#040306,#0c0a12);border-top:1px solid var(--b)}
+.wg,.rg{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.wc{background:rgba(255,255,255,.025);border:1px solid var(--b);border-radius:var(--r);padding:1.25rem;transition:all .2s}
+.wc:hover{background:rgba(245,200,66,.05);border-color:var(--bh)}
+.wi{font-size:1.65rem;margin-bottom:.55rem;display:block}
+.wc h3{color:var(--g);font-weight:700;font-size:13.5px;margin-bottom:4px}
+.wc p{color:var(--mu);font-size:12px;line-height:1.6}
+.rc{background:rgba(255,255,255,.025);border:1.5px solid var(--b);border-radius:var(--r);padding:1.2rem}
+.rc-stars{color:var(--g);font-size:13px;margin-bottom:.55rem}
+.rc-txt{font-size:13px;line-height:1.65;margin-bottom:.8rem;color:rgba(255,255,255,.82)}
+.rc-user{display:flex;align-items:center;gap:8px}
+.rc-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:12px;flex-shrink:0}
+/* FOOTER */
+.footer{background:#030205;border-top:1px solid var(--b);padding:2.5rem 1.5rem 1rem}
+.ft{max-width:1200px;margin:0 auto}
+.fg2{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;margin-bottom:1.4rem}
+.fb h3{font-family:'Cairo',sans-serif;font-weight:800;font-size:15px;color:var(--g);margin-bottom:5px}
+.fb p{color:rgba(245,200,66,.35);font-size:12px;line-height:1.7}
+.fc h4{color:rgba(245,200,66,.6);font-weight:700;font-size:12px;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+.fc li{list-style:none;margin-bottom:5px}
+.fc a{color:rgba(245,200,66,.35);font-size:12px;cursor:pointer;transition:color .2s}
+.fc a:hover{color:var(--g)}
+.fbot{border-top:1px solid rgba(245,200,66,.08);padding-top:.78rem;display:flex;justify-content:space-between;align-items:center}
+.fcp{color:rgba(245,200,66,.25);font-size:11px}
+/* CAT PAGE */
+.fp{display:none;position:fixed;inset:0;z-index:800;background:var(--bg);overflow-y:auto}
+.fp.open{display:block;animation:sU .28s ease}
+@keyframes sU{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.cp-bar{position:sticky;top:0;z-index:10;background:rgba(6,5,10,.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--b);padding-top:.3rem}
+.cp-crumb{display:flex;align-items:center;gap:7px;padding:.5rem 1.5rem;border-bottom:1px solid rgba(245,200,66,.06);font-size:11px;color:var(--di);font-weight:600}
+.ch{cursor:pointer;transition:color .18s}.ch:hover{color:var(--g)}
+.csep{color:rgba(245,200,66,.2)}
+.cp-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1rem;padding:.78rem 1.5rem}
+.cp-back{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,#1c1400,#261800);border:1.5px solid var(--g3);color:var(--g);border-radius:10px;padding:8px 16px;font-size:13px;font-weight:800;cursor:pointer;transition:all .23s;white-space:nowrap;flex-shrink:0}
+.cp-back:hover{background:linear-gradient(135deg,#2a1e00,#381f00);border-color:var(--g);box-shadow:0 0 14px rgba(245,200,66,.18);transform:translateX(-2px)}
+.cp-back svg{flex-shrink:0;transition:transform .18s}.cp-back:hover svg{transform:translateX(-2px)}
+.cp-tw{text-align:center;min-width:0}
+.cp-t{font-family:'Cairo',sans-serif;font-weight:900;font-size:1.05rem;color:#fff;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cp-te{font-size:.73rem;color:var(--di);display:block;margin-top:1px}
+.cp-sp{width:120px;flex-shrink:0}
+/* Controls */
+.cp-ctrl{max-width:1200px;margin:0 auto;padding:.9rem 1.5rem;display:flex;flex-direction:column;gap:9px}
+.cr{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.cl{font-size:10px;font-weight:700;color:var(--di);letter-spacing:.5px;text-transform:uppercase;flex-shrink:0}
+.cbtn{background:rgba(255,255,255,.04);border:1.5px solid var(--b);border-radius:18px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--mu);cursor:pointer;transition:all .2s}
+.cbtn:hover,.cbtn.on{background:var(--gb);border-color:var(--bh);color:var(--g)}
+.cb-a{border-color:#ed1c24;color:#ff7070;background:rgba(237,28,36,.06)}.cb-a.on{background:rgba(237,28,36,.16);box-shadow:0 0 10px rgba(237,28,36,.18)}
+.cb-i{border-color:#0071c5;color:#60b4f7;background:rgba(0,113,197,.06)}.cb-i.on{background:rgba(0,113,197,.16)}
+.cb-n{border-color:#76b900;color:#a3e635;background:rgba(118,185,0,.06)}.cb-n.on{background:rgba(118,185,0,.16)}
+/* Budget */
+.brow{display:flex;align-items:center;gap:12px;background:var(--gd);border:1px solid var(--b);border-radius:11px;padding:.6rem .95rem}
+.bl{font-size:12px;font-weight:700;color:var(--mu);flex-shrink:0}
+.slw{flex:1;position:relative;height:22px;display:flex;align-items:center}
+.bsl{position:absolute;width:100%;height:100%;opacity:0;cursor:pointer;z-index:3;margin:0;direction:ltr}
+.btrk{width:100%;height:5px;background:rgba(245,200,66,.11);border-radius:3px;position:relative;overflow:visible}
+.bfll{position:absolute;top:0;right:0;height:100%;background:linear-gradient(90deg,var(--g),var(--gn));border-radius:3px;transition:width .12s}
+.bknb{position:absolute;top:50%;right:0;width:15px;height:15px;background:#fff;border:2.5px solid var(--g);border-radius:50%;transform:translate(50%,-50%);pointer-events:none;z-index:2;box-shadow:0 2px 8px rgba(245,200,66,.38);transition:right .12s}
+.bvl{font-family:'Cairo',sans-serif;font-weight:800;font-size:.9rem;color:var(--g);flex-shrink:0;min-width:88px;text-align:center}
+/* Meta */
+.cp-meta{max-width:1200px;margin:0 auto;padding:.5rem 1.5rem .8rem;display:flex;align-items:center;justify-content:space-between}
+.cp-cnt{font-size:12px;color:var(--di)}
+.vbs{display:flex;gap:5px}
+.vb{width:30px;height:30px;border:1.5px solid var(--b);border-radius:7px;background:var(--gd);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;color:var(--mu)}
+.vb:hover,.vb.on{border-color:var(--g);background:var(--gb);color:var(--g)}
+.cp-body{max-width:1200px;margin:0 auto;padding:0 1.5rem 4rem}
+/* PROD GRID */
+.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.pg.g4{grid-template-columns:repeat(4,1fr);gap:11px}
+.pg.gl{grid-template-columns:1fr;gap:9px}
+.pg-empty{grid-column:1/-1;text-align:center;padding:5rem;color:var(--mu)}
+/* PRODUCT CARD */
+.pc{background:linear-gradient(155deg,var(--bg3),var(--bg2));border:1.5px solid var(--b);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:all .23s;position:relative;display:flex;flex-direction:column}
+.pc:hover{border-color:var(--bh);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.52)}
+.pc.dim{opacity:.38;filter:grayscale(.55);transform:none!important}
+.pc-rk{position:absolute;top:9px;right:9px;z-index:5;width:21px;height:21px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;background:rgba(0,0,0,.55);color:var(--di);border:1px solid rgba(255,255,255,.08)}
+.pc-rk.r1{background:rgba(245,200,66,.2);color:var(--g);border-color:rgba(245,200,66,.35)}
+.pc-rk.r2{background:rgba(192,192,192,.14);color:#c0c0c0;border-color:rgba(192,192,192,.28)}
+.pc-rk.r3{background:rgba(205,127,50,.14);color:#cd7f32;border-color:rgba(205,127,50,.28)}
+.pc-br{position:absolute;top:9px;left:9px;z-index:5;font-size:8px;font-weight:900;padding:2px 7px;border-radius:6px}
+.bi{background:#0071c5;color:#fff}.ba{background:#ed1c24;color:#fff}.bn{background:#76b900;color:#fff}
+.pc-img{height:145px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;transition:transform .28s;flex-shrink:0}
+.pc:hover .pc-img{transform:scale(1.04)}
+.pc-img svg{width:98px;height:98px;transition:all .28s}
+.pc:hover .pc-img svg{transform:scale(1.07)}
+.pc-img-t{position:absolute;bottom:5px;inset-x:0;text-align:center;font-size:8.5px;color:var(--di);font-weight:600}
+.g4 .pc-img{height:100px}.g4 .pc-img svg{width:68px;height:68px}
+.gl .pc{flex-direction:row}.gl .pc-img{width:115px;min-width:115px;height:auto;border-radius:0;flex-shrink:0}.gl .pc-img svg{width:72px;height:72px}.gl .pc-img-t{display:none}
+.pc-b{padding:.88rem;flex:1;display:flex;flex-direction:column}
+.pc-cat{font-size:9px;color:var(--di);font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:3px}
+.pc-nm{font-size:13px;font-weight:800;color:#fff;line-height:1.3;margin-bottom:3px}
+.pc-sp{font-size:10px;color:rgba(245,200,66,.52);font-weight:600;margin-bottom:5px}
+.pc-st{font-size:11px;color:var(--g);margin-bottom:6px}
+.pc-st span{color:rgba(245,200,66,.22);font-size:10px}
+.pr-row{display:flex;align-items:center;gap:7px;margin-bottom:5px}
+.pr-l{font-size:9.5px;color:var(--mu);font-weight:600;flex-shrink:0}
+.pr-bar{flex:1;height:4px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden}
+.pr-f{height:100%;background:linear-gradient(90deg,var(--gn),var(--g) 60%,var(--rd));border-radius:2px}
+.pr-p{font-size:10px;color:var(--g);font-weight:700;flex-shrink:0;min-width:26px}
+.bd-row{display:flex;align-items:center;gap:7px;margin-bottom:8px}
+.bd-bar{flex:1;height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden}
+.bd-st{font-size:9px;font-weight:700;flex-shrink:0;white-space:nowrap}
+.pc-pr{display:flex;align-items:baseline;gap:7px;margin-bottom:9px;margin-top:auto}
+.pc-cur{font-family:'Cairo',sans-serif;font-weight:900;font-size:1.08rem}
+.pc-old{font-size:10.5px;color:var(--di);text-decoration:line-through}
+.pc-acts{display:flex;gap:6px}
+.btn-add{flex:1;border:none;border-radius:8px;padding:9px;font-size:12px;font-weight:800;cursor:pointer;background:linear-gradient(135deg,var(--g),var(--g2));color:#06050a;transition:all .2s}
+.btn-add:hover{filter:brightness(1.1)}.btn-add.done{background:linear-gradient(135deg,var(--gn),#16a34a);color:#fff}
+.btn-eye{background:var(--gd);border:1.5px solid var(--b);border-radius:8px;padding:9px 11px;font-size:12px;cursor:pointer;color:#fff;transition:all .2s}
+.btn-eye:hover{background:var(--gb)}
+.g4 .pc-sp,.g4 .pc-st,.g4 .pr-row,.g4 .bd-row,.g4 .pc-cat{display:none}
+.g4 .pc-nm{font-size:11px}.g4 .pc-cur{font-size:.9rem}.g4 .pc-b{padding:.62rem}
+.gl .pc-b{padding:.85rem 1rem}
+/* PROD PAGE */
+#prodPage{z-index:850}
+.pn{position:sticky;top:0;z-index:10;background:rgba(6,5,10,.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--b);padding-top:.3rem}
+.pn-cr{display:flex;align-items:center;gap:7px;padding:.5rem 1.5rem;border-bottom:1px solid rgba(245,200,66,.06);font-size:11px;color:var(--di);font-weight:600}
+.pn-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1rem;padding:.78rem 1.5rem}
+.p-back{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,#1c1400,#261800);border:1.5px solid var(--g3);color:var(--g);border-radius:10px;padding:8px 16px;font-size:13px;font-weight:800;cursor:pointer;transition:all .23s;white-space:nowrap;flex-shrink:0}
+.p-back:hover{background:linear-gradient(135deg,#2a1e00,#381f00);border-color:var(--g);box-shadow:0 0 14px rgba(245,200,66,.18);transform:translateX(-2px)}
+.p-back svg,.cp-back svg{flex-shrink:0}
+.pn-c{text-align:center;min-width:0}
+.pn-ar{font-family:'Cairo',sans-serif;font-weight:900;font-size:1rem;color:#fff;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pn-en{font-size:.73rem;color:var(--di);display:block;margin-top:1px}
+.pn-sp{width:120px;flex-shrink:0}
+.pd-body{max-width:1100px;margin:0 auto;padding:1.75rem 1.5rem 5rem}
+.pd-lay{display:grid;grid-template-columns:1fr 315px;gap:1.5rem;margin-bottom:2rem}
+.pd-card{background:linear-gradient(155deg,var(--bg3),var(--bg2));border:1.5px solid var(--bh);border-radius:var(--r);overflow:hidden;margin-bottom:1rem}
+.pd-imgb{height:270px;display:flex;align-items:center;justify-content:center;position:relative}
+.pd-imgb svg{width:190px;height:190px;filter:drop-shadow(0 8px 22px rgba(0,0,0,.5))}
+.pd-info{padding:1.3rem}
+.pd-en{font-size:10.5px;color:var(--di);margin-bottom:3px}
+.pd-nm{font-size:1.1rem;font-weight:900;color:#fff;margin-bottom:5px;line-height:1.3}
+.pd-st{font-size:13px;color:var(--g);margin-bottom:.6rem}
+.pd-desc{font-size:13px;color:var(--mu);line-height:1.7}
+.spc-card{background:linear-gradient(155deg,var(--bg3),var(--bg2));border:1.5px solid var(--b);border-radius:var(--r);overflow:hidden}
+.spc-hd{background:rgba(245,200,66,.07);padding:9px 15px;font-size:10px;font-weight:700;color:var(--g3);letter-spacing:.5px;border-bottom:1px solid var(--b);text-transform:uppercase}
+.spc-row{display:flex;justify-content:space-between;align-items:center;padding:9px 15px;border-bottom:1px solid rgba(245,200,66,.04);font-size:13px}
+.spc-row:last-child{border:none}.spc-row:nth-child(even){background:rgba(245,200,66,.018)}
+.sk{color:var(--mu);font-weight:600}.sv2{font-weight:700;color:#fff}
+.pd-r{display:flex;flex-direction:column;gap:11px}
+.pd-pc{background:linear-gradient(155deg,var(--bg3),var(--bg2));border:1.5px solid var(--bh);border-radius:var(--r);padding:1.3rem}
+.pdp-l{font-size:10px;color:var(--di);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+.pdp-p{font-family:'Cairo',sans-serif;font-weight:900;font-size:2.1rem;margin-bottom:5px;line-height:1}
+.pdp-o{font-size:11.5px;color:var(--di);text-decoration:line-through;margin-bottom:.3rem}
+.pdp-bdg{display:inline-block;background:rgba(34,197,94,.13);border:1px solid rgba(34,197,94,.27);color:var(--gn);border-radius:18px;padding:2px 9px;font-size:10.5px;font-weight:700;margin-bottom:.85rem}
+.sb{width:100%;border:none;border-radius:9px;padding:11px 13px;font-size:12.5px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;transition:all .2s;text-decoration:none;font-family:'Tajawal',sans-serif}
+.sb:hover{transform:scale(1.01);filter:brightness(1.06)}
+.sb .stg{font-size:9.5px;background:rgba(0,0,0,.22);border-radius:4px;padding:2px 7px}
+.sb-cart{background:linear-gradient(135deg,var(--g),var(--g2));color:#06050a}
+.sb-amz{background:linear-gradient(135deg,#ff9900,#cc7700);color:#000}
+.sb-ali{background:linear-gradient(135deg,#e02e24,#a01818);color:#fff}
+.sb-egg{background:linear-gradient(135deg,#1a5276,#145a86);color:#fff}
+.sb-bld{background:linear-gradient(135deg,#7c3aed,#4c1d95);color:#fff}
+.pd-bc{background:linear-gradient(135deg,#080610,#14121e);border:1.5px solid var(--b);border-radius:var(--r);padding:1rem}
+.ai-card{background:linear-gradient(135deg,rgba(124,58,237,.1),rgba(76,29,149,.06));border:1.5px solid rgba(124,58,237,.24);border-radius:var(--r);padding:1rem}
+.ai-ct{font-size:12px;font-weight:700;color:#a78bfa;margin-bottom:.42rem}
+.ai-cp{font-size:12px;color:var(--mu);line-height:1.65;margin-bottom:.68rem}
+.rel-sec{border-top:1px solid var(--b);padding-top:1.5rem}
+.rel-t{font-family:'Cairo',sans-serif;font-weight:800;font-size:1.05rem;color:var(--g);margin-bottom:1rem}
+.rel-g{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.rel-c{background:rgba(255,255,255,.025);border:1.5px solid var(--b);border-radius:11px;padding:.8rem;cursor:pointer;display:flex;gap:9px;align-items:center;transition:all .2s}
+.rel-c:hover{border-color:var(--bh);background:var(--gd)}
+.rel-c svg{width:42px;height:42px;flex-shrink:0}
+.rel-nm{font-size:11.5px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
+.rel-pr{font-family:'Cairo',sans-serif;font-weight:800;font-size:.9rem}
+/* AI */
+.ai-ovl{display:none;position:fixed;inset:0;z-index:1100;background:rgba(0,0,0,.68);align-items:flex-end;justify-content:center}
+.ai-ovl.open{display:flex}
+.ai-box{background:var(--bg2);width:100%;max-width:540px;height:78vh;border-radius:22px 22px 0 0;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 -22px 60px rgba(0,0,0,.6)}
+.ai-hd{background:var(--bg);padding:.9rem 1.2rem;display:flex;align-items:center;gap:9px;border-bottom:2px solid var(--g3)}
+.ai-av{width:36px;height:36px;background:linear-gradient(135deg,#7c3aed,#5b21b6);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.ai-hi h3{color:#fff;font-family:'Cairo',sans-serif;font-weight:700;font-size:13.5px;margin:0}
+.ai-hi p{color:var(--di);font-size:10px;margin:0}
+.ai-cl{margin-right:auto;background:var(--gd);border:none;color:var(--g);width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center}
+.ai-msgs{flex:1;overflow-y:auto;padding:.9rem;display:flex;flex-direction:column;gap:9px}
+.am{max-width:85%}.am.bot{align-self:flex-start}.am.usr{align-self:flex-end}
+.am-b{padding:9px 13px;border-radius:13px;font-size:13px;line-height:1.65;color:#fff}
+.am.bot .am-b{background:linear-gradient(135deg,var(--bg3),#201e28);border-radius:4px 13px 13px 13px}
+.am.usr .am-b{background:linear-gradient(135deg,#7c3aed,#5b21b6);border-radius:13px 4px 13px 13px}
+.ai-ty{display:flex;gap:4px;padding:9px 13px;background:linear-gradient(135deg,var(--bg3),#201e28);border-radius:4px 13px 13px 13px;align-self:flex-start}
+.td{width:5px;height:5px;background:rgba(245,200,66,.5);border-radius:50%;animation:td 1.2s infinite}
+.td:nth-child(2){animation-delay:.2s}.td:nth-child(3){animation-delay:.4s}
+@keyframes td{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-4px)}}
+.ai-sgs{display:flex;gap:5px;flex-wrap:wrap;padding:0 .9rem .45rem}
+.ai-sg{background:var(--gd);border:1px solid var(--b);border-radius:17px;padding:5px 11px;font-size:11px;font-weight:600;color:var(--g);cursor:pointer;transition:all .2s}
+.ai-sg:hover{background:var(--gb)}
+.ai-ir{padding:.6rem .9rem 1rem;border-top:1px solid var(--b);display:flex;gap:7px}
+.ai-inp{flex:1;background:rgba(245,200,66,.04);border:1.5px solid var(--b);border-radius:10px;padding:9px 12px;color:#fff;font-size:13px;resize:none;outline:none;min-height:42px;max-height:90px;direction:rtl}
+.ai-inp:focus{border-color:rgba(245,200,66,.38)}.ai-inp::placeholder{color:rgba(245,200,66,.25)}
+.ai-snd{background:linear-gradient(135deg,var(--g),var(--g2));color:#06050a;border:none;border-radius:8px;width:40px;height:40px;font-size:15px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
+/* CART */
+.cart-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:1200}
+.cart-ov.open{display:block}
+.cart-pn{position:fixed;left:0;top:0;height:100%;width:330px;background:var(--bg2);z-index:1300;display:flex;flex-direction:column;transform:translateX(-100%);transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:4px 0 28px rgba(0,0,0,.6)}
+.cart-pn.open{transform:translateX(0)}
+.cart-hd{background:var(--bg);padding:.95rem 1.3rem;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--g3)}
+.cart-hd h2{font-family:'Cairo',sans-serif;font-weight:800;font-size:.95rem;color:var(--g)}
+.cx{background:var(--gd);border:none;color:var(--g);width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center}
+.ci-wrap{flex:1;overflow-y:auto;padding:.9rem}
+.ci-empty{text-align:center;padding:3rem 1rem;color:var(--mu)}
+.ci{display:flex;align-items:center;gap:9px;padding:9px 0;border-bottom:1px solid var(--b)}
+.ci-img{width:42px;height:42px;background:var(--gd);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ci-img svg{width:30px;height:30px}
+.ci-info{flex:1;min-width:0}
+.ci-nm{font-size:12px;font-weight:700;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ci-pr{font-size:12px;color:var(--g);font-weight:700}
+.ci-q{display:flex;align-items:center;gap:5px;margin-top:4px}
+.qb{background:rgba(245,200,66,.08);border:1px solid var(--b);border-radius:4px;width:22px;height:22px;cursor:pointer;font-size:11px;color:#fff;display:flex;align-items:center;justify-content:center}
+.ci-del{background:none;border:none;color:var(--rd);cursor:pointer;font-size:13px;padding:2px}
+.cart-ft{padding:1rem 1.3rem;border-top:1px solid var(--b)}
+.cart-tot{display:flex;justify-content:space-between;font-family:'Cairo',sans-serif;font-weight:800;font-size:1rem;margin-bottom:.9rem;color:#fff}
+.chk-btn{width:100%;background:linear-gradient(135deg,var(--g),var(--g2));color:#06050a;border:none;border-radius:10px;padding:11px;font-size:14px;font-weight:800;cursor:pointer;transition:all .2s}
+/* AUTH */
+.auth-ov{display:none;position:fixed;inset:0;z-index:1400;background:rgba(0,0,0,.9);align-items:center;justify-content:center;padding:1rem}
+.auth-ov.open{display:flex}
+.auth-box{background:var(--bg2);border:1.5px solid var(--bh);border-radius:18px;width:100%;max-width:400px;overflow:hidden;box-shadow:0 22px 70px rgba(0,0,0,.7)}
+.auth-hd{background:var(--bg);padding:1.1rem 1.4rem;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--g3)}
+.auth-hd h2{font-family:'Cairo',sans-serif;font-weight:800;font-size:.98rem;color:var(--g)}
+.ax{background:var(--gd);border:none;color:var(--g);width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center}
+.atbs{display:flex;background:rgba(245,200,66,.04);border-bottom:1px solid var(--b)}
+.atb{flex:1;padding:9px;font-size:12.5px;font-weight:700;cursor:pointer;border:none;background:none;color:var(--mu);border-bottom:2px solid transparent;transition:all .2s}
+.atb.on{color:var(--g);background:rgba(245,200,66,.06);border-bottom-color:var(--g)}
+.auth-bd{padding:1.3rem}
+.aform{display:flex;flex-direction:column;gap:.78rem}
+.fg{display:flex;flex-direction:column;gap:4px}
+.fg label{font-size:11.5px;font-weight:700;color:var(--mu)}
+.fi{background:#0a0912;border:1.5px solid rgba(245,200,66,.16);color:#fff;border-radius:9px;padding:10px 12px;font-size:14px;outline:none;direction:rtl;transition:border-color .2s;width:100%}
+.fi:focus{border-color:rgba(245,200,66,.45)}.fi::placeholder{color:rgba(245,200,66,.18)}
+.adiv{display:flex;align-items:center;gap:.7rem;color:var(--di);font-size:12px;margin:.1rem 0}
+.adiv::before,.adiv::after{content:'';flex:1;height:1px;background:var(--b)}
+.abtn2{width:100%;border:none;border-radius:10px;padding:11px;font-size:14px;font-weight:800;cursor:pointer;background:linear-gradient(135deg,var(--g),var(--g2));color:#06050a;transition:all .2s}
+.abtn2:hover{filter:brightness(1.07);transform:translateY(-1px)}
+.asoc{width:100%;border:1.5px solid var(--bh);border-radius:10px;padding:10px;font-size:13px;font-weight:700;cursor:pointer;background:rgba(245,200,66,.04);color:#fff;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px}
+.asoc:hover{background:var(--gb);border-color:rgba(245,200,66,.4)}
+.asw{text-align:center;font-size:11.5px;color:var(--di);margin-top:.1rem}
+.asw a{color:var(--g);font-weight:700;cursor:pointer}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(70px);background:linear-gradient(135deg,var(--g),var(--g2));color:#06050a;padding:10px 20px;border-radius:9px;font-weight:700;font-size:12.5px;z-index:9999;transition:transform .32s cubic-bezier(.34,1.56,.64,1);pointer-events:none;white-space:nowrap;box-shadow:0 8px 22px rgba(0,0,0,.35)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+@media(max-width:960px){.cg{grid-template-columns:repeat(4,1fr)}.bgrid,.pg{grid-template-columns:repeat(2,1fr)}.wg,.rg{grid-template-columns:repeat(2,1fr)}.fg2{grid-template-columns:1fr 1fr}.pd-lay{grid-template-columns:1fr}.nav-c{display:none}}
+@media(max-width:600px){.cg{grid-template-columns:repeat(2,1fr)}.bgrid,.pg,.pg.g4{grid-template-columns:repeat(2,1fr)}.wg,.rg{grid-template-columns:1fr}.cart-pn{width:100%}.rel-g{grid-template-columns:1fr}}
+
+/* ══ CHECKOUT MODAL ══ */
+.co-ovl{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.88);align-items:center;justify-content:center;padding:1rem}
+.co-ovl.open{display:flex;animation:fadeIn .25s ease}
+.co-box{background:var(--bg2);border:1.5px solid var(--bh);border-radius:20px;width:100%;max-width:480px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.7);max-height:90vh;overflow-y:auto}
+.co-hd{background:linear-gradient(135deg,#1c1400,#2a1e00);padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid var(--b)}
+.co-hd h2{font-family:'Cairo',sans-serif;font-weight:900;font-size:1.1rem;color:var(--g)}
+.co-x{background:rgba(245,200,66,.1);border:none;color:var(--g);width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center}
+.co-body{padding:1.5rem}
+.co-items{background:var(--bg3);border:1px solid var(--b);border-radius:12px;padding:1rem;margin-bottom:1.25rem;max-height:200px;overflow-y:auto}
+.co-item{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(245,200,66,.06);font-size:13px}
+.co-item:last-child{border:none;font-weight:800;color:var(--g);padding-top:8px;margin-top:4px;border-top:1px solid var(--bh)}
+.co-sec-title{font-size:11px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.75rem}
+.co-form{display:flex;flex-direction:column;gap:.65rem;margin-bottom:1.25rem}
+.co-inp{background:#0a0912;border:1.5px solid rgba(245,200,66,.18);color:#fff;border-radius:9px;padding:10px 13px;font-size:13.5px;outline:none;direction:rtl;transition:border-color .2s;width:100%;font-family:'Tajawal',sans-serif}
+.co-inp:focus{border-color:rgba(245,200,66,.48)}
+.co-inp::placeholder{color:rgba(245,200,66,.22)}
+.co-row2{display:grid;grid-template-columns:1fr 1fr;gap:.65rem}
+.co-pay-title{font-size:11px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.75rem}
+.co-pay-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1.25rem}
+.pay-opt{background:var(--bg3);border:1.5px solid var(--b);border-radius:10px;padding:.65rem;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;transition:all .2s;text-align:center}
+.pay-opt:hover,.pay-opt.sel{border-color:var(--bh);background:var(--gb)}
+.pay-opt.sel{box-shadow:0 0 12px rgba(245,200,66,.18)}
+.pay-ic{font-size:1.5rem;line-height:1}
+.pay-nm{font-size:10px;font-weight:700;color:var(--mu)}
+.pay-opt.sel .pay-nm{color:var(--g)}
+.co-submit{width:100%;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,var(--g),var(--g2));color:#06050a;transition:all .22s;display:flex;align-items:center;justify-content:center;gap:8px;font-family:'Tajawal',sans-serif}
+.co-submit:hover{box-shadow:0 8px 24px rgba(245,200,66,.38);transform:translateY(-1px)}
+.co-submit:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.co-success{text-align:center;padding:2rem 1.5rem}
+.co-success-ic{font-size:3.5rem;display:block;margin-bottom:1rem}
+.co-success h3{font-family:'Cairo',sans-serif;font-weight:900;font-size:1.2rem;color:var(--g);margin-bottom:.5rem}
+.co-success p{font-size:13px;color:var(--mu);line-height:1.65}
+.co-ref{background:var(--bg3);border:1px solid var(--b);border-radius:8px;padding:.75rem;margin-top:.75rem;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--g);letter-spacing:1px}
+
+/* ══ AI Product Action Buttons ══ */
+.ai-prod-card {
+  background: linear-gradient(135deg, rgba(245,200,66,.08), rgba(245,200,66,.04));
+  border: 1px solid rgba(245,200,66,.2);
+  border-radius: 12px;
+  padding: .75rem;
+  margin-top: .5rem;
+}
+.ai-prod-name {
+  font-size: 12.5px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 3px;
+}
+.ai-prod-price {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 900;
+  font-size: .95rem;
+  color: var(--g);
+  margin-bottom: .6rem;
+}
+.ai-prod-btns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+.ai-pb {
+  border: none;
+  border-radius: 7px;
+  padding: 7px 6px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: all .2s;
+  font-family: 'Tajawal', sans-serif;
+  text-decoration: none;
+}
+.ai-pb:hover { filter: brightness(1.12); transform: translateY(-1px); }
+.ai-pb-cart { background: linear-gradient(135deg,var(--g),var(--g2)); color: #06050a; }
+.ai-pb-amz  { background: linear-gradient(135deg,#ff9900,#e68000); color: #000; }
+.ai-pb-egg  { background: linear-gradient(135deg,#1a5276,#0e3a5c); color: #fff; }
+.ai-pb-ali  { background: linear-gradient(135deg,#e02e24,#a01818); color: #fff; }
+.ai-pb-view { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); color: var(--tx); }
+
+
+/* ── Build Cart Button ── */
+.bcard-add{width:100%;border:none;border-radius:10px;padding:11px;font-size:13.5px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,var(--g),var(--g2));color:#06050a;transition:all .22s;display:flex;align-items:center;justify-content:center;gap:7px;font-family:'Tajawal',sans-serif;margin-bottom:7px}
+.bcard-add:hover{box-shadow:0 6px 20px rgba(245,200,66,.38);transform:translateY(-1px)}
+.bcard-add.done{background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff}
+
+/* ── Admin Panel ── */
+.admin-ovl{display:none;position:fixed;inset:0;z-index:2000;background:var(--bg);overflow-y:auto}
+.admin-ovl.open{display:block;animation:sU .28s ease}
+.admin-bar{background:rgba(6,5,10,.98);border-bottom:2px solid var(--g3);padding:.9rem 1.5rem;display:flex;align-items:center;gap:1rem;position:sticky;top:0;z-index:10}
+.admin-bar h1{font-family:'Cairo',sans-serif;font-weight:900;font-size:1.1rem;color:var(--g);flex:1}
+.admin-body{max-width:1100px;margin:0 auto;padding:1.5rem}
+.admin-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:1.75rem}
+.astat{background:linear-gradient(145deg,var(--bg3),var(--bg2));border:1.5px solid var(--b);border-radius:14px;padding:1.1rem;text-align:center}
+.astat-val{font-family:'Cairo',sans-serif;font-weight:900;font-size:1.8rem;color:var(--g);display:block}
+.astat-lbl{font-size:11px;color:var(--mu);display:block;margin-top:3px;text-transform:uppercase;letter-spacing:.5px}
+.admin-sec-title{font-family:'Cairo',sans-serif;font-weight:800;font-size:1rem;color:var(--g);margin-bottom:1rem;display:flex;align-items:center;gap:8px}
+.admin-table{width:100%;border-collapse:collapse;margin-bottom:2rem;font-size:12.5px}
+.admin-table th{background:rgba(245,200,66,.1);color:var(--g);font-weight:700;padding:9px 12px;text-align:right;border-bottom:1px solid var(--b)}
+.admin-table td{padding:9px 12px;border-bottom:1px solid rgba(245,200,66,.05);color:var(--tx);vertical-align:top}
+.admin-table tr:hover td{background:rgba(245,200,66,.03)}
+.admin-badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700}
+.badge-done{background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.25)}
+.badge-aband{background:rgba(251,146,60,.15);color:#fb923c;border:1px solid rgba(251,146,60,.25)}
+.badge-view{background:rgba(59,130,246,.15);color:#60a5fa;border:1px solid rgba(59,130,246,.25)}
+.adm-prod-list{font-size:11px;color:var(--mu);line-height:1.7}
+.admin-close{background:rgba(245,200,66,.1);border:1.5px solid var(--b);color:var(--g);border-radius:9px;padding:7px 15px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s}
+.admin-close:hover{background:rgba(245,200,66,.2)}
+.admin-tabs{display:flex;gap:8px;margin-bottom:1.5rem;flex-wrap:wrap}
+.admin-tab{background:rgba(255,255,255,.04);border:1.5px solid var(--b);border-radius:50px;padding:7px 16px;font-size:12.5px;font-weight:700;color:var(--mu);cursor:pointer;transition:all .2s}
+.admin-tab:hover,.admin-tab.on{background:var(--gb);border-color:var(--g);color:var(--g)}
+.empty-admin{text-align:center;padding:3rem;color:var(--mu);font-size:14px}
+
+@media(max-width:640px){.admin-stats{grid-template-columns:repeat(2,1fr)}.admin-table{font-size:11px}}
+
+
+.bcard-add{width:100%;border:none;border-radius:10px;padding:11px;font-size:13px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#f5c842,#c47a00);color:#06050a;font-family:'Tajawal',sans-serif;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:7px;transition:all .22s}
+.bcard-add:hover{box-shadow:0 6px 20px rgba(245,200,66,.4);transform:translateY(-1px)}
+.bcard-add.ok{background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff}
+.adm{display:none;position:fixed;inset:0;z-index:3000;background:var(--bg);overflow-y:auto}
+.adm.open{display:block}
+.adm-hd{background:rgba(6,5,10,.98);border-bottom:2px solid var(--g3);padding:1rem 1.5rem;display:flex;align-items:center;gap:1rem;position:sticky;top:0;z-index:10}
+.adm-hd h1{font-family:'Cairo',sans-serif;font-weight:900;font-size:1.05rem;color:var(--g);flex:1;margin:0}
+.adm-body{max-width:1100px;margin:0 auto;padding:1.5rem}
+.adm-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:1.75rem}
+.astat{background:linear-gradient(145deg,var(--bg3),var(--bg2));border:1.5px solid var(--b);border-radius:14px;padding:1.1rem;text-align:center}
+.astat-v{font-family:'Cairo',sans-serif;font-weight:900;font-size:1.8rem;display:block}
+.astat-l{font-size:10px;color:var(--mu);display:block;margin-top:3px;text-transform:uppercase;letter-spacing:.5px}
+.adm-tabs{display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap}
+.adm-tab{background:rgba(255,255,255,.04);border:1.5px solid var(--b);border-radius:50px;padding:7px 16px;font-size:12px;font-weight:700;color:var(--mu);cursor:pointer;transition:all .2s}
+.adm-tab.on{background:rgba(245,200,66,.1);border-color:var(--g);color:var(--g)}
+.adm-tbl{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:2rem}
+.adm-tbl th{background:rgba(245,200,66,.08);color:var(--g);font-weight:700;padding:9px 12px;text-align:right;border-bottom:1px solid var(--b)}
+.adm-tbl td{padding:9px 12px;border-bottom:1px solid rgba(245,200,66,.05);color:var(--tx);vertical-align:top}
+.adm-tbl tr:hover td{background:rgba(245,200,66,.025)}
+.bdg{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700}
+.bdg-ok{background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.25)}
+.bdg-ab{background:rgba(251,146,60,.15);color:#fb923c;border:1px solid rgba(251,146,60,.25)}
+.bdg-vw{background:rgba(59,130,246,.15);color:#60a5fa;border:1px solid rgba(59,130,246,.25)}
+.adm-cl{background:rgba(245,200,66,.08);border:1.5px solid var(--b);color:var(--g);border-radius:9px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer}
+.adm-mt{display:flex;align-items:center;gap:8px;font-family:'Cairo',sans-serif;font-weight:800;font-size:.95rem;color:var(--g);margin-bottom:1rem}
+.adm-empty{text-align:center;padding:3rem;color:var(--mu)}
+.adm-login{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:1rem}
+.adm-login h2{font-family:'Cairo',sans-serif;font-weight:900;color:var(--g)}
+@media(max-width:640px){.adm-grid{grid-template-columns:repeat(2,1fr)}}
+
+</style>
+</head>
+<body>
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo" onclick="goHome()"><div class="nav-logo-i">🖥</div><div class="nav-brand"><span class="a">الحاسب </span><span class="b">الذكي</span></div></div>
+  <div class="nav-c">
+    <a onclick="s2('cats')">الأقسام</a>
+    <a onclick="s2('builds')">التجميعات</a>
+    <a onclick="s2('why')">مميزاتنا</a>
+    <a onclick="s2('reviews')">التقييمات</a>
+  </div>
+  <div class="nav-r">
+    <button class="nb nb-p" onclick="openAI()">🤖 AI</button>
+    <div id="authBtn" class="nb-gh" onclick="openAuth('login')">👤 دخول</div>
+    <button class="admin-close" onclick="openAdm()" style="margin-left:5px;padding:6px 12px;font-size:11px">🛡️ Admin</button>
+    <button class="adm-cl" style="padding:6px 11px;font-size:11px;border-radius:50px" ondblclick="openAdm()">🛡️</button>
+    <button class="cart-b" onclick="openCart()">🛒 <span class="cn" id="cn">0</span></button>
+  </div>
+</nav>
+<div class="promo">✨ خصم 15% — كود: <code>HASIB15</code></div>
+
+<div id="home">
+<!-- HERO -->
+<section class="hero">
+  <div class="h-grid"></div>
+  <div class="h-inner">
+    <div class="h-badge"><span class="h-dot"></span>متجر معتمد · شحن سريع · ضمان 3 سنوات</div>
+    <h1 class="h-title"><span class="l1">الحاسب</span><span class="l2">الذكـي</span></h1>
+    <p class="h-sub">وجهتك الأولى لأجزاء الكمبيوتر الأصلية في المملكة<br><br>ابنِ جهازك المثالي بمساعدة الذكاء الاصطناعي</p>
+    <div class="h-btns">
+      <button class="hb hb-g" onclick="s2('cats')">🛍️ تصفح الأقسام</button>
+      <div class="sep">OR</div>
+      <button class="hb hb-p" onclick="openAI()">🤖 بناء بـ AI <span class="beta">BETA</span></button>
+      <div class="sep">OR</div>
+      <button class="hb-o" onclick="s2('builds')">🔥 تجميعات جاهزة</button>
+    </div>
+  </div>
+</section>
+<div class="stats">
+  <div><span class="sv">+20K</span><span class="sl">عميل</span></div>
+  <div><span class="sv">+500</span><span class="sl">منتج</span></div>
+  <div><span class="sv">24/7</span><span class="sl">دعم</span></div>
+  <div><span class="sv" style="color:#f7d060">5 ★</span><span class="sl">تقييم</span></div>
+  <div><span class="sv">3 سنوات</span><span class="sl">ضمان</span></div>
+</div>
+
+<!-- CATEGORIES -->
+<div class="sec" id="cats">
+  <span class="stag">التصنيفات</span>
+  <div class="stitle">تصفح حسب القسم</div>
+  <div class="ssub">اضغط على أي قسم لعرض منتجاته كاملةً مرتبةً من الأضعف للأقوى</div>
+  <div class="cg">
+    <div class="cc" onclick="openCat('cpu')"><div class="cc-ic">⚡</div><span class="cc-nm">المعالجات</span><span class="cc-en">CPU</span><span class="cc-cnt" id="c-cpu">-</span></div>
+    <div class="cc" onclick="openCat('gpu')"><div class="cc-ic">🎮</div><span class="cc-nm">كروت الشاشة</span><span class="cc-en">GPU</span><span class="cc-cnt" id="c-gpu">-</span></div>
+    <div class="cc" onclick="openCat('ram')"><div class="cc-ic">💾</div><span class="cc-nm">الذاكرة RAM</span><span class="cc-en">Memory</span><span class="cc-cnt" id="c-ram">-</span></div>
+    <div class="cc" onclick="openCat('storage')"><div class="cc-ic">💿</div><span class="cc-nm">التخزين</span><span class="cc-en">SSD & HDD</span><span class="cc-cnt" id="c-storage">-</span></div>
+    <div class="cc" onclick="openCat('mb')"><div class="cc-ic">🖥️</div><span class="cc-nm">اللوحات الأم</span><span class="cc-en">Motherboards</span><span class="cc-cnt" id="c-mb">-</span></div>
+    <div class="cc" onclick="openCat('cooling')"><div class="cc-ic">❄️</div><span class="cc-nm">التبريد</span><span class="cc-en">Cooling</span><span class="cc-cnt" id="c-cooling">-</span></div>
+    <div class="cc" onclick="openCat('psu')"><div class="cc-ic">🔌</div><span class="cc-nm">مزود الطاقة</span><span class="cc-en">PSU</span><span class="cc-cnt" id="c-psu">-</span></div>
+    <div class="cc" onclick="openCat('case')"><div class="cc-ic">📦</div><span class="cc-nm">الهياكل</span><span class="cc-en">PC Cases</span><span class="cc-cnt" id="c-case">-</span></div>
+  </div>
+</div>
+
+<!-- BUILDS -->
+<div class="builds-bg" id="builds">
+<div class="sec">
+  <span class="stag">تجميعات جاهزة</span>
+  <div class="stitle">🔥 تجميعات PC جاهزة</div>
+  <div class="ssub">اختر تجميعتك — مواصفات كاملة + أداء متوقع + روابط شراء من المتاجر العالمية</div>
+  <div class="btabs">
+    <button class="btab on" onclick="showB('all',this)">🌐 الكل</button>
+    <button class="btab" onclick="showB('eco',this)">💚 اقتصادية</button>
+    <button class="btab" onclick="showB('mid',this)">🔵 متوسطة</button>
+    <button class="btab" onclick="showB('game',this)">🎮 قيمنق</button>
+    <button class="btab" onclick="showB('pro',this)">💜 احترافية</button>
+    <button class="btab" onclick="showB('stream',this)">🎬 بث وتصميم</button>
+  </div>
+  <div class="bgrid" id="bgrid"></div>
+</div>
+</div>
+
+<!-- WHY -->
+<div class="why-bg sec" id="why">
+  <span class="stag">مميزاتنا</span><div class="stitle" style="margin-bottom:1.4rem">لماذا حاسب الذكي؟</div>
+  <div class="wg">
+    <div class="wc"><span class="wi">🏆</span><h3>أصلية 100%</h3><p>مستوردة من موزعين معتمدين مع ضمان 3 سنوات.</p></div>
+    <div class="wc"><span class="wi">🚚</span><h3>شحن سريع</h3><p>توصيل 24-48 ساعة مجاناً فوق 299 ريال.</p></div>
+    <div class="wc"><span class="wi">🛡️</span><h3>ضمان كامل</h3><p>إرجاع 15 يوم ودعم فني متخصص 24/7.</p></div>
+    <div class="wc"><span class="wi">💰</span><h3>أفضل الأسعار</h3><p>نطابق أي سعر أقل في السوق.</p></div>
+    <div class="wc"><span class="wi">🔧</span><h3>خدمة التجميع</h3><p>نجمع جهازك ونختبره قبل الشحن.</p></div>
+    <div class="wc"><span class="wi">🤖</span><h3>مساعد AI</h3><p>ذكاء اصطناعي يختار أفضل مكونات لك.</p></div>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<div class="sec" id="reviews">
+  <span class="stag">آراء العملاء</span><div class="stitle" style="margin-bottom:1.4rem">ماذا يقول عملاؤنا</div>
+  <div class="rg">
+    <div class="rc"><div class="rc-stars">★★★★★</div><p class="rc-txt">تجربة رائعة! Core i9 وصل في نفس اليوم. أصلي وبأفضل سعر.</p><div class="rc-user"><div class="rc-av" style="background:linear-gradient(135deg,#1a6bff,#0a44cc)">أح</div><div><div style="font-weight:700;font-size:13px;color:#fff">أحمد الشمري</div><div style="font-size:11px;color:var(--di)">مهندس · الرياض</div></div></div></div>
+    <div class="rc"><div class="rc-stars">★★★★★</div><p class="rc-txt">اشتريت RTX 4080 وكانت التجربة مميزة جداً.</p><div class="rc-user"><div class="rc-av" style="background:linear-gradient(135deg,#e8a020,#c06000)">مع</div><div><div style="font-weight:700;font-size:13px;color:#fff">محمد العتيبي</div><div style="font-size:11px;color:var(--di)">مصمم · جدة</div></div></div></div>
+    <div class="rc"><div class="rc-stars">★★★★★</div><p class="rc-txt">خدمة التجميع ممتازة. الجهاز وصل مُجمَّعاً وجاهزاً!</p><div class="rc-user"><div class="rc-av" style="background:linear-gradient(135deg,#22c55e,#0a5c28)">فد</div><div><div style="font-weight:700;font-size:13px;color:#fff">فهد الدوسري</div><div style="font-size:11px;color:var(--di)">طالب · الدمام</div></div></div></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer"><div class="ft">
+  <div class="fg2">
+    <div class="fb"><h3>الحاسب الذكي</h3><p>وجهتك الأولى لقطع وتجميعات الكمبيوتر في المملكة.</p></div>
+    <div class="fc"><h4>الأقسام</h4><ul><li><a onclick="openCat('cpu')">المعالجات</a></li><li><a onclick="openCat('gpu')">كروت الشاشة</a></li><li><a onclick="openCat('ram')">الذاكرة</a></li><li><a onclick="openCat('storage')">التخزين</a></li></ul></div>
+    <div class="fc"><h4>الدعم</h4><ul><li><a>تتبع الطلب</a></li><li><a>الإرجاع</a></li><li><a>الضمان</a></li><li><a>اتصل بنا</a></li></ul></div>
+    <div class="fc"><h4>الشركة</h4><ul><li><a>من نحن</a></li><li><a>شراكات</a></li><li><a>وظائف</a></li><li><a>مدونتنا</a></li></ul></div>
+  </div>
+  <div class="fbot"><span class="fcp">© 2025 الحاسب الذكي</span></div>
+</div></footer>
+</div>
+
+<!-- CAT PAGE -->
+<div class="fp" id="catPage">
+  <div class="cp-bar">
+    <div class="cp-crumb"><span class="ch" onclick="closeCat()">الرئيسية</span><span class="csep">›</span><span id="crumb-cat" style="color:rgba(245,200,66,.6)"></span></div>
+    <div class="cp-row">
+      <button class="cp-back" onclick="closeCat()"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 13L5 8L10 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>العودة</button>
+      <div class="cp-tw"><span class="cp-t" id="cp-title"></span><span class="cp-te" id="cp-title-en"></span></div>
+      <div class="cp-sp"></div>
+    </div>
+  </div>
+  <div class="cp-ctrl">
+    <div class="cr">
+      <span class="cl">الترتيب:</span>
+      <button class="cbtn on" id="sA" onclick="setSort('asc',this)">↑ الأضعف</button>
+      <button class="cbtn" id="sD" onclick="setSort('desc',this)">↓ الأقوى</button>
+      <div id="brow" style="display:none;gap:5px;align-items:center;flex-wrap:wrap">
+        <span class="cl" style="margin-right:4px">الماركة:</span>
+        <button class="cbtn cb-a" id="bAMD" onclick="tBrand('amd',this)">● AMD</button>
+        <button class="cbtn cb-i" id="bIntel" onclick="tBrand('intel',this)">Intel ●</button>
+        <button class="cbtn cb-n" id="bNV" onclick="tBrand('nvidia',this)">● NVIDIA</button>
+      </div>
+    </div>
+    <div class="brow">
+      <span class="bl">💰 الميزانية:</span>
+      <div class="slw">
+        <input type="range" class="bsl" id="bsl" min="100" max="15000" step="100" value="15000" oninput="onBud(this.value)" style="direction:ltr">
+        <div class="btrk"><div class="bfll" id="bFll" style="width:100%"></div><div class="bknb" id="bKnb" style="right:0%"></div></div>
+      </div>
+      <span class="bvl" id="bVl">15,000 ر.س</span>
+    </div>
+  </div>
+  <div class="cp-meta">
+    <span class="cp-cnt" id="cp-cnt">عرض 0 منتج</span>
+    <div class="vbs">
+      <button class="vb on" id="v3" onclick="setV('',this)" title="3"><svg width="13" height="13" viewBox="0 0 13 13"><rect x="0" y="0" width="3.5" height="5.5" rx="1" fill="currentColor"/><rect x="4.75" y="0" width="3.5" height="5.5" rx="1" fill="currentColor"/><rect x="9.5" y="0" width="3.5" height="5.5" rx="1" fill="currentColor"/><rect x="0" y="7.5" width="3.5" height="5.5" rx="1" fill="currentColor"/><rect x="4.75" y="7.5" width="3.5" height="5.5" rx="1" fill="currentColor"/><rect x="9.5" y="7.5" width="3.5" height="5.5" rx="1" fill="currentColor"/></svg></button>
+      <button class="vb" id="v4" onclick="setV('g4',this)" title="4"><svg width="13" height="13" viewBox="0 0 13 13"><rect x="0" y="0" width="2.3" height="5.5" rx=".7" fill="currentColor"/><rect x="3.5" y="0" width="2.3" height="5.5" rx=".7" fill="currentColor"/><rect x="7" y="0" width="2.3" height="5.5" rx=".7" fill="currentColor"/><rect x="10.5" y="0" width="2.5" height="5.5" rx=".7" fill="currentColor"/><rect x="0" y="7.5" width="2.3" height="5.5" rx=".7" fill="currentColor"/><rect x="3.5" y="7.5" width="2.3" height="5.5" rx=".7" fill="currentColor"/><rect x="7" y="7.5" width="2.3" height="5.5" rx=".7" fill="currentColor"/><rect x="10.5" y="7.5" width="2.5" height="5.5" rx=".7" fill="currentColor"/></svg></button>
+      <button class="vb" id="vl" onclick="setV('gl',this)" title="قائمة"><svg width="13" height="13" viewBox="0 0 13 13"><rect x="0" y="0" width="13" height="3.2" rx="1" fill="currentColor"/><rect x="0" y="4.9" width="13" height="3.2" rx="1" fill="currentColor"/><rect x="0" y="9.8" width="13" height="3.2" rx="1" fill="currentColor"/></svg></button>
+    </div>
+  </div>
+  <div class="cp-body"><div class="pg" id="pg"></div></div>
+</div>
+
+<!-- PROD PAGE -->
+<div class="fp" id="prodPage" style="z-index:850">
+  <div class="pn">
+    <div class="pn-cr"><span class="ch" onclick="closeProd();closeCat()">الرئيسية</span><span class="csep">›</span><span class="ch" id="p-crumb-cat" onclick="closeProd()"></span><span class="csep">›</span><span id="p-crumb-prod" style="color:var(--di);max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span></div>
+    <div class="pn-row">
+      <button class="p-back" onclick="closeProd()"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 13L5 8L10 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="backLbl">العودة للقسم</span></button>
+      <div class="pn-c"><span class="pn-ar" id="p-name-ar"></span><span class="pn-en" id="p-name-en"></span></div>
+      <div class="pn-sp"></div>
+    </div>
+  </div>
+  <div class="pd-body" id="pd-body"></div>
+</div>
+
+<!-- AI -->
+<div class="ai-ovl" id="aiOvl" onclick="if(event.target===this)closeAI()">
+  <div class="ai-box">
+    <div class="ai-hd"><div class="ai-av">🤖</div><div class="ai-hi"><h3>مساعد الحاسب الذكي</h3><p>متخصص في مكونات الكمبيوتر</p></div><button class="ai-cl" onclick="closeAI()">✕</button></div>
+    <div class="ai-msgs" id="ai-msgs"></div>
+    <div class="ai-sgs" id="ai-sgs"></div>
+    <div class="ai-ir"><textarea class="ai-inp" id="ai-inp" placeholder="اسألني عن: ألعاب، تصميم، ميزانيتك..." rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendAI()}"></textarea><button class="ai-snd" onclick="sendAI()">➤</button></div>
+  </div>
+</div>
+
+<!-- CART -->
+<div class="cart-ov" id="cartOv" onclick="closeCart()"></div>
+<div class="cart-pn" id="cartPn">
+  <div class="cart-hd"><h2>🛒 سلة التسوق</h2><button class="cx" onclick="closeCart()">✕</button></div>
+  <div class="ci-wrap" id="ci-wrap"></div>
+  <div id="cart-ft" style="display:none"><div class="cart-ft"><div class="cart-tot"><span>الإجمالي</span><span id="cart-tot" style="color:var(--g)"></span></div><button class="chk-btn" onclick="closeCart();openCheckout()">✅ إتمام الشراء</button></div></div>
+</div>
+
+<!-- AUTH -->
+<div class="auth-ov" id="authOv" onclick="if(event.target===this)closeAuth()">
+  <div class="auth-box">
+    <div class="auth-hd"><h2 id="authTitle">تسجيل الدخول</h2><button class="ax" onclick="closeAuth()">✕</button></div>
+    <div class="atbs"><button class="atb on" id="atL" onclick="swAuthTab('login')">تسجيل الدخول</button><button class="atb" id="atR" onclick="swAuthTab('reg')">إنشاء حساب</button></div>
+    <div class="auth-bd">
+      <div id="loginF"><div class="aform">
+        <div class="fg"><label>البريد الإلكتروني</label><input type="email" class="fi" placeholder="example@email.com" id="lE"></div>
+        <div class="fg"><label>كلمة المرور</label><input type="password" class="fi" placeholder="••••••••" id="lP"></div>
+        <button class="abtn2" onclick="doLogin()">تسجيل الدخول</button>
+        <div class="adiv">أو</div>
+        <button class="asoc" onclick="doSoc('Google')">🌐 Google</button>
+        <div class="asw">ليس لديك حساب؟ <a onclick="swAuthTab('reg')">إنشاء حساب</a></div>
+      </div></div>
+      <div id="regF" style="display:none"><div class="aform">
+        <div class="fg"><label>الاسم الكامل</label><input type="text" class="fi" placeholder="محمد أحمد" id="rN"></div>
+        <div class="fg"><label>البريد الإلكتروني</label><input type="email" class="fi" placeholder="example@email.com" id="rE"></div>
+        <div class="fg"><label>كلمة المرور</label><input type="password" class="fi" placeholder="8 أحرف على الأقل" id="rP"></div>
+        <div class="fg"><label>تأكيد كلمة المرور</label><input type="password" class="fi" placeholder="••••••••" id="rP2"></div>
+        <button class="abtn2" onclick="doReg()">إنشاء الحساب</button>
+        <div class="adiv">أو</div>
+        <button class="asoc" onclick="doSoc('Google')">🌐 Google</button>
+        <div class="asw">لديك حساب؟ <a onclick="swAuthTab('login')">تسجيل الدخول</a></div>
+      </div></div>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+
+
+<!-- ══ CHECKOUT MODAL ══ -->
+<div class="co-ovl" id="co-ovl" onclick="if(event.target===this)closeCheckout()">
+  <div class="co-box">
+    <div class="co-hd">
+      <h2>🛒 إتمام الشراء</h2>
+      <button class="co-x" onclick="closeCheckout()">✕</button>
+    </div>
+    <div style="padding:1.5rem" id="co-form-wrap">
+      <!-- Order items -->
+      <div class="co-sec-title">📦 ملخص الطلب</div>
+      <div class="co-items" id="co-items"></div>
+      <!-- Customer info -->
+      <div class="co-sec-title">👤 معلومات الشحن</div>
+      <div class="co-form">
+        <input type="text" class="co-inp" id="co-name" placeholder="الاسم الكامل *" required>
+        <input type="tel" class="co-inp" id="co-phone" placeholder="رقم الجوال * (05xxxxxxxx)" required>
+        <input type="email" class="co-inp" id="co-email" placeholder="البريد الإلكتروني (اختياري)">
+        <input type="text" class="co-inp" id="co-addr" placeholder="العنوان — المدينة، الحي، الشارع *" required>
+        <div class="co-row2">
+          <input type="text" class="co-inp" id="co-city" placeholder="المدينة">
+          <input type="text" class="co-inp" id="co-zip" placeholder="الرمز البريدي">
+        </div>
+      </div>
+      <!-- Payment method -->
+      <div class="co-pay-title">💳 طريقة الدفع</div>
+      <div class="co-pay-grid">
+        <div class="pay-opt sel" onclick="selPayMethod('mada',this)"><span class="pay-ic">💳</span><span class="pay-nm">Mada</span></div>
+        <div class="pay-opt" onclick="selPayMethod('visa',this)"><span class="pay-ic">💳</span><span class="pay-nm">Visa</span></div>
+        <div class="pay-opt" onclick="selPayMethod('master',this)"><span class="pay-ic">💳</span><span class="pay-nm">Mastercard</span></div>
+        <div class="pay-opt" onclick="selPayMethod('stc',this)"><span class="pay-ic">📱</span><span class="pay-nm">STC Pay</span></div>
+        <div class="pay-opt" onclick="selPayMethod('apple',this)"><span class="pay-ic">🍎</span><span class="pay-nm">Apple Pay</span></div>
+        <div class="pay-opt" onclick="selPayMethod('cod',this)"><span class="pay-ic">💵</span><span class="pay-nm">الدفع عند الاستلام</span></div>
+      </div>
+      <button class="co-submit" id="co-submit-btn" onclick="submitOrder()">✅ تأكيد الطلب وإتمام الشراء</button>
+      <p style="text-align:center;font-size:11px;color:var(--di);margin-top:.75rem">🔒 بياناتك محفوظة ومشفرة بالكامل</p>
+    </div>
+    <div id="co-success" style="display:none"></div>
+  </div>
+</div>
+
+
+
+<!-- ADMIN PANEL -->
+<div class="admin-ovl" id="adminPanel">
+  <div class="admin-bar">
+    <div>
+      <h1>🛡️ لوحة تحكم SAIF</h1>
+      <div style="font-size:11px;color:var(--mu)">shwihe700@gmail.com</div>
+    </div>
+    <button class="admin-close" onclick="closeAdm()">✕ إغلاق</button>
+  </div>
+  <div class="admin-body">
+    <!-- Stats -->
+    <div class="admin-stats">
+      <div class="astat"><span class="astat-val" id="ad-tot-orders">0</span><span class="astat-lbl">إجمالي الطلبات</span></div>
+      <div class="astat"><span class="astat-val" id="ad-done-orders" style="color:#4ade80">0</span><span class="astat-lbl">طلبات مكتملة</span></div>
+      <div class="astat"><span class="astat-val" id="ad-aband" style="color:#fb923c">0</span><span class="astat-lbl">سلات مهجورة</span></div>
+      <div class="astat"><span class="astat-val" id="ad-revenue" style="color:var(--g)">0</span><span class="astat-lbl">إجمالي المبيعات ر.س</span></div>
+    </div>
+    <!-- Tabs -->
+    <div class="admin-tabs">
+      <button class="admin-tab on" onclick="admTab('orders',this)">📦 الطلبات المكتملة</button>
+      <button class="admin-tab" onclick="admTab('carts',this)">🛒 السلات المهجورة</button>
+      <button class="admin-tab" onclick="admTab('views',this)">👁️ تصفح بدون شراء</button>
+    </div>
+    <div id="adminContent"></div>
+  </div>
+</div>
+
+
+<div class="adm" id="admPanel">
+  <div class="adm-hd">
+    <div><h1>🛡️ لوحة SAIF</h1><div style="font-size:10px;color:var(--mu)">shwihe700@gmail.com</div></div>
+    <button class="adm-cl" onclick="closeAdm()">✕ إغلاق</button>
+  </div>
+  <div class="adm-body">
+    <div class="adm-grid">
+      <div class="astat"><span class="astat-v" id="av1">0</span><span class="astat-l">إجمالي الطلبات</span></div>
+      <div class="astat"><span class="astat-v" id="av2" style="color:#4ade80">0</span><span class="astat-l">مكتملة</span></div>
+      <div class="astat"><span class="astat-v" id="av3" style="color:#fb923c">0</span><span class="astat-l">سلات مهجورة</span></div>
+      <div class="astat"><span class="astat-v" id="av4">0</span><span class="astat-l">مبيعات ر.س</span></div>
+    </div>
+    <div class="adm-tabs">
+      <button class="adm-tab on" onclick="admTab('orders',this)">📦 الطلبات</button>
+      <button class="adm-tab" onclick="admTab('carts',this)">🛒 السلات المهجورة</button>
+      <button class="adm-tab" onclick="admTab('views',this)">👁 الزوار</button>
+    </div>
+    <div id="admContent"></div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════
+// الحاسب الذكي — JS كامل v4 (بدون template literals)
+// ═══════════════════════════════════════════════
+
+// ── SVG ──
+var IMG={
+ci:'<svg viewBox="0 0 100 100" fill="none"><rect x="20" y="20" width="60" height="60" rx="7" fill="#0d2045" stroke="#2060b0" stroke-width="1.5"/><rect x="33" y="33" width="34" height="34" rx="4" fill="#1a5caa"/><text x="50" y="56" font-family="Arial" font-weight="900" font-size="14" fill="#fff" text-anchor="middle">intel</text></svg>',
+ca:'<svg viewBox="0 0 100 100" fill="none"><rect x="20" y="20" width="60" height="60" rx="7" fill="#200808" stroke="#cc2200" stroke-width="1.5"/><rect x="33" y="33" width="34" height="34" rx="4" fill="#991100"/><text x="50" y="52" font-family="Arial" font-weight="900" font-size="11" fill="#fff" text-anchor="middle">AMD</text><text x="50" y="63" font-family="Arial" font-size="7" fill="rgba(255,160,160,.7)" text-anchor="middle">RYZEN</text></svg>',
+gn:'<svg viewBox="0 0 100 100" fill="none"><rect x="4" y="28" width="92" height="44" rx="7" fill="#081408" stroke="#1a7010" stroke-width="1.5"/><circle cx="23" cy="50" r="11" fill="#050505" stroke="#1a7010" stroke-width="1.2"/><circle cx="23" cy="50" r="7" fill="#0d2508"/><circle cx="47" cy="50" r="11" fill="#050505" stroke="#1a7010" stroke-width="1.2"/><circle cx="47" cy="50" r="7" fill="#0d2508"/><text x="80" y="52" font-family="Arial" font-weight="900" font-size="8" fill="#76b900" text-anchor="middle">RTX</text></svg>',
+ga:'<svg viewBox="0 0 100 100" fill="none"><rect x="4" y="28" width="92" height="44" rx="7" fill="#180404" stroke="#cc1800" stroke-width="1.5"/><circle cx="23" cy="50" r="11" fill="#050505" stroke="#aa1500" stroke-width="1.2"/><circle cx="23" cy="50" r="7" fill="#1e0606"/><circle cx="47" cy="50" r="11" fill="#050505" stroke="#aa1500" stroke-width="1.2"/><circle cx="47" cy="50" r="7" fill="#1e0606"/><text x="80" y="52" font-family="Arial" font-weight="900" font-size="7" fill="#cc1800" text-anchor="middle">AMD RX</text></svg>',
+gg:'<svg viewBox="0 0 100 100" fill="none"><rect x="4" y="28" width="92" height="44" rx="7" fill="#080816" stroke="#2040a0" stroke-width="1.5"/><circle cx="23" cy="50" r="11" fill="#050505" stroke="#2040a0" stroke-width="1.2"/><circle cx="23" cy="50" r="7" fill="#0a0a1e"/><circle cx="47" cy="50" r="11" fill="#050505" stroke="#2040a0" stroke-width="1.2"/><circle cx="47" cy="50" r="7" fill="#0a0a1e"/><text x="80" y="52" font-family="Arial" font-weight="900" font-size="8" fill="#4060c0" text-anchor="middle">GTX</text></svg>',
+rm:'<svg viewBox="0 0 100 100" fill="none"><rect x="6" y="28" width="88" height="44" rx="4" fill="#0e1828" stroke="#2040a0" stroke-width="1.5"/><rect x="9" y="31" width="82" height="11" rx="2" fill="#0080ff" opacity=".5"/><text x="50" y="60" font-family="Arial" font-weight="900" font-size="9" fill="#60a5fa" text-anchor="middle">DDR5</text></svg>',
+hd:'<svg viewBox="0 0 100 100" fill="none"><rect x="10" y="18" width="80" height="64" rx="7" fill="#0a0e18" stroke="#1e3050" stroke-width="1.5"/><circle cx="50" cy="46" r="16" fill="#0e1428" stroke="#1e3050"/><circle cx="50" cy="46" r="9" fill="#060810"/><circle cx="50" cy="46" r="3" fill="#1e3050"/><text x="50" y="74" font-family="Arial" font-size="6" fill="#64748b" text-anchor="middle">HDD</text></svg>',
+ss:'<svg viewBox="0 0 100 100" fill="none"><rect x="10" y="22" width="80" height="56" rx="7" fill="#0a0e18" stroke="#1e3050" stroke-width="1.5"/><circle cx="50" cy="46" r="14" fill="#0e1428" stroke="#1e3050"/><circle cx="50" cy="46" r="8" fill="#060810"/><text x="50" y="73" font-family="Arial" font-size="6" fill="#64748b" text-anchor="middle">SATA</text></svg>',
+sn:'<svg viewBox="0 0 100 100" fill="none"><rect x="6" y="32" width="88" height="36" rx="5" fill="#080e1e" stroke="#1e3a5f" stroke-width="1.5"/><rect x="11" y="37" width="50" height="26" rx="3" fill="#050810"/><text x="36" y="53" font-family="Arial" font-weight="900" font-size="12" fill="#3b82f6" text-anchor="middle">NVMe</text></svg>',
+s5:'<svg viewBox="0 0 100 100" fill="none"><rect x="6" y="32" width="88" height="36" rx="5" fill="#060a18" stroke="#2060c0" stroke-width="1.5"/><rect x="11" y="37" width="50" height="26" rx="3" fill="#040610"/><text x="36" y="53" font-family="Arial" font-weight="900" font-size="10" fill="#60a5fa" text-anchor="middle">PCIe 5</text></svg>',
+mb:'<svg viewBox="0 0 100 100" fill="none"><rect x="6" y="6" width="88" height="88" rx="5" fill="#080f00" stroke="#1a3300" stroke-width="1.5"/><rect x="18" y="12" width="36" height="36" rx="4" fill="#080808" stroke="#f5c842" stroke-width=".8"/><text x="36" y="34" font-family="Arial" font-weight="700" font-size="7.5" fill="#f5c842" text-anchor="middle">CPU</text></svg>',
+cr:'<svg viewBox="0 0 100 100" fill="none"><rect x="32" y="5" width="36" height="90" rx="5" fill="#111" stroke="#333" stroke-width="1.2"/><rect x="5" y="20" width="30" height="60" rx="6" fill="#0f0f0f" stroke="#222"/><circle cx="20" cy="50" r="18" fill="#080808" stroke="#3b82f6" stroke-width="1.5"/><circle cx="20" cy="50" r="6" fill="#0e0e0e"/></svg>',
+ao:'<svg viewBox="0 0 100 100" fill="none"><rect x="4" y="4" width="92" height="32" rx="5" fill="#0e0e0e" stroke="#7c3aed" stroke-width="1.5"/><circle cx="18" cy="20" r="12" fill="#080808" stroke="#7c3aed" stroke-width="1.5"/><circle cx="50" cy="20" r="12" fill="#080808" stroke="#7c3aed" stroke-width="1.5"/><circle cx="82" cy="20" r="12" fill="#080808" stroke="#7c3aed" stroke-width="1.5"/><text x="50" y="76" font-family="Arial" font-size="8" font-weight="700" fill="#a78bfa" text-anchor="middle">AIO 360</text></svg>',
+ps:'<svg viewBox="0 0 100 100" fill="none"><rect x="8" y="12" width="84" height="76" rx="7" fill="#0e0e0e" stroke="#222" stroke-width="1.5"/><circle cx="50" cy="50" r="28" fill="#080808" stroke="#333"/><circle cx="50" cy="50" r="11" fill="#0e0e0e" stroke="#f5c842" stroke-width="1.5"/><text x="50" y="54" font-family="Arial" font-weight="900" font-size="7.5" fill="#f5c842" text-anchor="middle">PSU</text></svg>',
+km:'<svg viewBox="0 0 100 100" fill="none"><rect x="25" y="8" width="50" height="84" rx="6" fill="#0e0e0e" stroke="#222" stroke-width="1.5"/><rect x="28" y="11" width="30" height="68" rx="4" fill="#0a1428" stroke="#1a2a5a"/><circle cx="43" cy="40" r="10" fill="#080808" stroke="#3355cc" stroke-width="1.2"/><text x="43" y="80" font-family="Arial" font-size="5.5" fill="#64748b" text-anchor="middle">Mini</text></svg>',
+md:'<svg viewBox="0 0 100 100" fill="none"><rect x="18" y="5" width="64" height="90" rx="6" fill="#0e0e0e" stroke="#222" stroke-width="1.5"/><rect x="21" y="8" width="42" height="78" rx="4" fill="#0a1428" stroke="#1a2a5a"/><circle cx="42" cy="36" r="13" fill="#080808" stroke="#3355cc" stroke-width="1.2"/><circle cx="42" cy="66" r="10" fill="#080808" stroke="#3355cc" stroke-width="1.2"/><text x="42" y="91" font-family="Arial" font-size="5" fill="#64748b" text-anchor="middle">Mid</text></svg>',
+ft:'<svg viewBox="0 0 100 100" fill="none"><rect x="12" y="3" width="76" height="94" rx="7" fill="#0e0e0e" stroke="#222" stroke-width="1.5"/><rect x="15" y="6" width="50" height="86" rx="5" fill="#0a1428" stroke="#1a2a5a"/><circle cx="40" cy="30" r="14" fill="#080808" stroke="#3355cc" stroke-width="1.2"/><circle cx="40" cy="58" r="12" fill="#080808" stroke="#3355cc" stroke-width="1.2"/><circle cx="40" cy="82" r="9" fill="#080808" stroke="#3355cc" stroke-width="1.2"/><text x="60" y="90" font-family="Arial" font-size="5" fill="#64748b" text-anchor="middle">Full</text></svg>'
+};
+function getImg(p){
+  var c=p.cat,b=p.brand||'',n=p.nameEn||'';
+  if(c==='cpu') return b==='amd'?IMG.ca:IMG.ci;
+  if(c==='gpu'){if(b==='amd') return IMG.ga;if(n.indexOf('GTX')>-1) return IMG.gg;return IMG.gn;}
+  if(c==='ram') return IMG.rm;
+  if(c==='storage'){if(n.indexOf('HDD')>-1) return IMG.hd;if(n.indexOf('PCIe 5')>-1||n.indexOf('Gen 5')>-1) return IMG.s5;if(n.indexOf('NVMe')>-1||n.indexOf('M.2')>-1) return IMG.sn;return IMG.ss;}
+  if(c==='mb') return IMG.mb;
+  if(c==='cooling') return(n.indexOf('AIO')>-1||n.indexOf('240')>-1||n.indexOf('360')>-1)?IMG.ao:IMG.cr;
+  if(c==='psu') return IMG.ps;
+  if(c==='case'){if(n.indexOf('Mini')>-1) return IMG.km;if(n.indexOf('Full')>-1) return IMG.ft;return IMG.md;}
+  return IMG.ci;
+}
+function bgC(p){
+  var b=p.brand||'',c=p.cat,n=p.nameEn||'';
+  if(b==='intel') return 'rgba(0,100,190,.12)';
+  if(b==='amd'&&c==='cpu') return 'rgba(200,0,0,.12)';
+  if(c==='gpu'&&b==='amd') return 'rgba(160,10,10,.12)';
+  if(c==='gpu'&&n.indexOf('GTX')>-1) return 'rgba(20,40,130,.12)';
+  if(c==='gpu') return 'rgba(20,100,20,.12)';
+  if(c==='ram') return 'rgba(20,50,160,.1)';
+  if(c==='storage') return 'rgba(10,25,90,.1)';
+  if(c==='mb') return 'rgba(10,60,10,.1)';
+  if(c==='cooling') return 'rgba(40,40,200,.1)';
+  if(c==='psu') return 'rgba(80,60,0,.1)';
+  return 'rgba(30,30,90,.1)';
+}
+
+// ── Products ──
+var P=[
+{id:'g0',cat:'gpu',brand:'nvidia',nameEn:'NVIDIA GeForce GTX 730 2GB',name:'GTX 730 2GB',price:150,perf:2,stars:2,rev:80,spec:'2GB DDR3 49W',specs:[['الذاكرة','2GB DDR3'],['TDP','49W']]},
+{id:'g1',cat:'gpu',brand:'nvidia',nameEn:'NVIDIA GeForce GTX 1050 Ti 4GB',name:'GTX 1050 Ti 4GB',price:349,perf:8,stars:3,rev:210,spec:'4GB GDDR5 75W',specs:[['الذاكرة','4GB GDDR5'],['TDP','75W']]},
+{id:'g2',cat:'gpu',brand:'nvidia',nameEn:'NVIDIA GeForce GTX 1060 6GB',name:'GTX 1060 6GB',price:449,perf:14,stars:4,rev:320,spec:'6GB GDDR5 120W',specs:[['الذاكرة','6GB GDDR5'],['TDP','120W']]},
+{id:'g3',cat:'gpu',brand:'nvidia',nameEn:'NVIDIA GeForce GTX 1070 8GB',name:'GTX 1070 8GB',price:549,perf:19,stars:4,rev:280,spec:'8GB GDDR5 150W',specs:[['الذاكرة','8GB GDDR5'],['TDP','150W']]},
+{id:'g4',cat:'gpu',brand:'nvidia',nameEn:'NVIDIA GeForce GTX 1080 Ti 11GB',name:'GTX 1080 Ti 11GB',price:749,perf:24,stars:4,rev:190,spec:'11GB GDDR5X 250W',specs:[['الذاكرة','11GB GDDR5X'],['TDP','250W']]},
+{id:'g5',cat:'gpu',brand:'nvidia',nameEn:'NVIDIA GeForce RTX 2060 6GB',name:'RTX 2060 6GB',price:699,perf:22,stars:4,rev:250,spec:'6GB GDDR6 160W',specs:[['الذاكرة','6GB GDDR6'],['TDP','160W']]},
+{id:'g6',cat:'gpu',brand:'nvidia',nameEn:'NVIDIA GeForce RTX 3050 8GB',name:'RTX 3050 8GB',price:799,perf:25,stars:4,rev:210,spec:'8GB GDDR6 130W',specs:[['الذاكرة','8GB GDDR6'],['TDP','130W']]},
+{id:'g7',cat:'gpu',brand:'nvidia',nameEn:'NVIDIA GeForce RTX 3060 12GB',name:'RTX 3060 12GB',price:999,perf:32,stars:4,rev:380,spec:'12GB GDDR6 170W',specs:[['الذاكرة','12GB GDDR6'],['TDP','170W']]},
+{id:'g8',cat:'gpu',brand:'nvidia',nameEn:'NVIDIA GeForce RTX 3060 Ti 8GB',name:'RTX 3060 Ti 8GB',price:1099,perf:38,stars:4,rev:290,spec:'8GB GDDR6 200W',specs:[['الذاكرة','8GB GDDR6'],['TDP','200W']]},
+{id:'g9',cat:'gpu',brand:'nvidia',nameEn:'NVIDIA GeForce RTX 3070 8GB',name:'RTX 3070 8GB',price:1299,perf:44,stars:5,rev:340,spec:'8GB GDDR6 220W',specs:[['الذاكرة','8GB GDDR6'],['TDP','220W']]},
+{id:'g10',cat:'gpu',brand:'nvidia',nameEn:'NVIDIA GeForce RTX 3080 10GB',name:'RTX 3080 10GB',price:1699,perf:52,stars:5,rev:280,spec:'10GB GDDR6X 320W',specs:[['الذاكرة','10GB GDDR6X'],['TDP','320W']]},
+{id:'g11',cat:'gpu',brand:'nvidia',nameEn:'NVIDIA GeForce RTX 4060 8GB',name:'RTX 4060 8GB',price:1299,perf:42,stars:4,rev:340,spec:'8GB GDDR6 115W',specs:[['الذاكرة','8GB GDDR6'],['TDP','115W']]},
+{id:'g12',cat:'gpu',brand:'nvidia',nameEn:'NVIDIA GeForce RTX 4060 Ti 16GB',name:'RTX 4060 Ti 16GB',price:1699,perf:50,stars:4,rev:220,spec:'16GB GDDR6 165W',specs:[['الذاكرة','16GB GDDR6'],['TDP','165W']]},
+{id:'g13',cat:'gpu',brand:'nvidia',nameEn:'NVIDIA GeForce RTX 4070 12GB',name:'RTX 4070 12GB',price:1999,perf:62,stars:5,rev:278,spec:'12GB GDDR6X 200W',specs:[['الذاكرة','12GB GDDR6X'],['TDP','200W']]},
+{id:'g14',cat:'gpu',brand:'nvidia',nameEn:'NVIDIA GeForce RTX 4070 Super 12GB',name:'RTX 4070 Super 12GB',price:2399,perf:70,stars:5,rev:445,spec:'12GB GDDR6X 220W',specs:[['الذاكرة','12GB GDDR6X'],['TDP','220W']]},
+{id:'g15',cat:'gpu',brand:'nvidia',nameEn:'NVIDIA GeForce RTX 4070 Ti Super 16GB',name:'RTX 4070 Ti Super 16GB',price:2999,perf:78,stars:5,rev:210,spec:'16GB GDDR6X 285W',specs:[['الذاكرة','16GB GDDR6X'],['TDP','285W']]},
+{id:'g16',cat:'gpu',brand:'nvidia',nameEn:'NVIDIA GeForce RTX 4080 Super 16GB',name:'RTX 4080 Super 16GB',price:3499,perf:86,stars:5,rev:212,spec:'16GB GDDR6X 320W',specs:[['الذاكرة','16GB GDDR6X'],['TDP','320W']]},
+{id:'g17',cat:'gpu',brand:'nvidia',nameEn:'NVIDIA GeForce RTX 4090 24GB',name:'RTX 4090 24GB',price:5499,perf:95,stars:5,rev:189,spec:'24GB GDDR6X 450W',specs:[['الذاكرة','24GB GDDR6X'],['TDP','450W']]},
+{id:'g18',cat:'gpu',brand:'nvidia',nameEn:'NVIDIA GeForce RTX 5080 16GB',name:'RTX 5080 16GB',price:4499,perf:92,stars:5,rev:95,spec:'16GB GDDR7 Blackwell',specs:[['الذاكرة','16GB GDDR7'],['الجيل','Blackwell']]},
+{id:'g19',cat:'gpu',brand:'nvidia',nameEn:'NVIDIA GeForce RTX 5090 32GB',name:'RTX 5090 32GB',price:8999,perf:100,stars:5,rev:62,spec:'32GB GDDR7 Blackwell',specs:[['الذاكرة','32GB GDDR7'],['الجيل','Blackwell']]},
+{id:'g20',cat:'gpu',brand:'amd',nameEn:'AMD Radeon RX 6600 8GB',name:'RX 6600 8GB',price:699,perf:28,stars:4,rev:190,spec:'8GB GDDR6 132W',specs:[['الذاكرة','8GB GDDR6'],['TDP','132W']]},
+{id:'g21',cat:'gpu',brand:'amd',nameEn:'AMD Radeon RX 6700 XT 12GB',name:'RX 6700 XT 12GB',price:999,perf:40,stars:4,rev:220,spec:'12GB GDDR6 230W',specs:[['الذاكرة','12GB GDDR6'],['TDP','230W']]},
+{id:'g22',cat:'gpu',brand:'amd',nameEn:'AMD Radeon RX 7700 XT 12GB',name:'RX 7700 XT 12GB',price:1499,perf:55,stars:4,rev:198,spec:'12GB GDDR6 245W',specs:[['الذاكرة','12GB GDDR6'],['TDP','245W']]},
+{id:'g23',cat:'gpu',brand:'amd',nameEn:'AMD Radeon RX 7800 XT 16GB',name:'RX 7800 XT 16GB',price:1799,perf:65,stars:5,rev:175,spec:'16GB GDDR6 263W',specs:[['الذاكرة','16GB GDDR6'],['TDP','263W']]},
+{id:'g24',cat:'gpu',brand:'amd',nameEn:'AMD Radeon RX 7900 XTX 24GB',name:'RX 7900 XTX 24GB',price:3999,perf:88,stars:5,rev:142,spec:'24GB GDDR6 355W',specs:[['الذاكرة','24GB GDDR6'],['TDP','355W']]},
+{id:'c0',cat:'cpu',brand:'intel',nameEn:'Intel Celeron G5905',name:'Intel Celeron G5905',price:149,perf:2,stars:2,rev:90,spec:'2C 3.5GHz LGA1200',specs:[['الأنوية','2'],['التردد','3.5GHz'],['المقبس','LGA1200']]},
+{id:'c1',cat:'cpu',brand:'intel',nameEn:'Intel Core i3-10100F',name:'Intel Core i3-10100F',price:199,perf:8,stars:3,rev:180,spec:'4C 4.3GHz LGA1200',specs:[['الأنوية','4'],['التردد','4.3GHz'],['المقبس','LGA1200']]},
+{id:'c2',cat:'cpu',brand:'intel',nameEn:'Intel Core i3-12100F',name:'Intel Core i3-12100F',price:299,perf:16,stars:4,rev:310,spec:'4C 4.3GHz LGA1700',specs:[['الأنوية','4'],['التردد','4.3GHz'],['المقبس','LGA1700']]},
+{id:'c3',cat:'cpu',brand:'intel',nameEn:'Intel Core i3-13100',name:'Intel Core i3-13100',price:329,perf:19,stars:4,rev:198,spec:'4C 4.5GHz LGA1700',specs:[['الأنوية','4'],['التردد','4.5GHz'],['المقبس','LGA1700']]},
+{id:'c4',cat:'cpu',brand:'intel',nameEn:'Intel Core i5-12400F',name:'Intel Core i5-12400F',price:389,perf:28,stars:5,rev:542,spec:'6C 4.4GHz LGA1700',specs:[['الأنوية','6'],['التردد','4.4GHz'],['المقبس','LGA1700']]},
+{id:'c5',cat:'cpu',brand:'intel',nameEn:'Intel Core i5-13400F',name:'Intel Core i5-13400F',price:449,perf:34,stars:5,rev:420,spec:'10C 4.6GHz LGA1700',specs:[['الأنوية','10'],['التردد','4.6GHz'],['المقبس','LGA1700']]},
+{id:'c6',cat:'cpu',brand:'intel',nameEn:'Intel Core i5-13600K',name:'Intel Core i5-13600K',price:549,perf:44,stars:5,rev:721,spec:'14C 5.1GHz LGA1700',specs:[['الأنوية','14'],['التردد','5.1GHz'],['المقبس','LGA1700']]},
+{id:'c7',cat:'cpu',brand:'intel',nameEn:'Intel Core i5-14600K',name:'Intel Core i5-14600K',price:649,perf:50,stars:5,rev:389,spec:'14C 5.3GHz LGA1700',specs:[['الأنوية','14'],['التردد','5.3GHz'],['المقبس','LGA1700']]},
+{id:'c8',cat:'cpu',brand:'intel',nameEn:'Intel Core i7-13700K',name:'Intel Core i7-13700K',price:849,perf:60,stars:5,rev:447,spec:'16C 5.4GHz LGA1700',specs:[['الأنوية','16'],['التردد','5.4GHz'],['المقبس','LGA1700']]},
+{id:'c9',cat:'cpu',brand:'intel',nameEn:'Intel Core i7-14700K',name:'Intel Core i7-14700K',price:999,perf:68,stars:5,rev:312,spec:'20C 5.6GHz LGA1700',specs:[['الأنوية','20'],['التردد','5.6GHz'],['المقبس','LGA1700']]},
+{id:'c10',cat:'cpu',brand:'intel',nameEn:'Intel Core i9-13900K',name:'Intel Core i9-13900K',price:1299,perf:78,stars:5,rev:298,spec:'24C 5.8GHz LGA1700',specs:[['الأنوية','24'],['التردد','5.8GHz'],['المقبس','LGA1700']]},
+{id:'c11',cat:'cpu',brand:'intel',nameEn:'Intel Core i9-14900K',name:'Intel Core i9-14900K',price:1699,perf:84,stars:5,rev:348,spec:'24C 6.0GHz LGA1700',specs:[['الأنوية','24'],['التردد','6.0GHz'],['المقبس','LGA1700']]},
+{id:'c12',cat:'cpu',brand:'intel',nameEn:'Intel Core Ultra 7 265K',name:'Core Ultra 7 265K',price:1449,perf:76,stars:5,rev:156,spec:'20C 5.5GHz LGA1851',specs:[['الأنوية','20'],['التردد','5.5GHz'],['المقبس','LGA1851']]},
+{id:'c13',cat:'cpu',brand:'intel',nameEn:'Intel Core Ultra 9 285K',name:'Core Ultra 9 285K',price:1899,perf:90,stars:5,rev:87,spec:'24C 5.7GHz LGA1851',specs:[['الأنوية','24'],['التردد','5.7GHz'],['المقبس','LGA1851']]},
+{id:'c14',cat:'cpu',brand:'amd',nameEn:'AMD Ryzen 3 3200G',name:'AMD Ryzen 3 3200G',price:179,perf:6,stars:3,rev:160,spec:'4C 4.0GHz AM4',specs:[['الأنوية','4'],['التردد','4.0GHz'],['المقبس','AM4']]},
+{id:'c15',cat:'cpu',brand:'amd',nameEn:'AMD Ryzen 3 4100',name:'AMD Ryzen 3 4100',price:269,perf:12,stars:3,rev:187,spec:'4C 4.0GHz AM4',specs:[['الأنوية','4'],['التردد','4.0GHz'],['المقبس','AM4']]},
+{id:'c16',cat:'cpu',brand:'amd',nameEn:'AMD Ryzen 5 5500',name:'AMD Ryzen 5 5500',price:319,perf:22,stars:4,rev:412,spec:'6C 4.2GHz AM4',specs:[['الأنوية','6'],['التردد','4.2GHz'],['المقبس','AM4']]},
+{id:'c17',cat:'cpu',brand:'amd',nameEn:'AMD Ryzen 5 5600X',name:'AMD Ryzen 5 5600X',price:399,perf:32,stars:5,rev:634,spec:'6C 4.6GHz AM4',specs:[['الأنوية','6'],['التردد','4.6GHz'],['المقبس','AM4']]},
+{id:'c18',cat:'cpu',brand:'amd',nameEn:'AMD Ryzen 5 7600X',name:'AMD Ryzen 5 7600X',price:499,perf:40,stars:5,rev:378,spec:'6C 5.3GHz AM5',specs:[['الأنوية','6'],['التردد','5.3GHz'],['المقبس','AM5']]},
+{id:'c19',cat:'cpu',brand:'amd',nameEn:'AMD Ryzen 7 5700X',name:'AMD Ryzen 7 5700X',price:529,perf:42,stars:5,rev:289,spec:'8C 4.6GHz AM4',specs:[['الأنوية','8'],['التردد','4.6GHz'],['المقبس','AM4']]},
+{id:'c20',cat:'cpu',brand:'amd',nameEn:'AMD Ryzen 7 7700X',name:'AMD Ryzen 7 7700X',price:699,perf:54,stars:5,rev:341,spec:'8C 5.4GHz AM5',specs:[['الأنوية','8'],['التردد','5.4GHz'],['المقبس','AM5']]},
+{id:'c21',cat:'cpu',brand:'amd',nameEn:'AMD Ryzen 7 7800X3D',name:'AMD Ryzen 7 7800X3D',price:1049,perf:70,stars:5,rev:512,spec:'8C 5.0GHz 3D Cache AM5',specs:[['الأنوية','8'],['التردد','5.0GHz'],['الكاش','96MB 3D'],['المقبس','AM5']]},
+{id:'c22',cat:'cpu',brand:'amd',nameEn:'AMD Ryzen 9 7900X',name:'AMD Ryzen 9 7900X',price:1149,perf:74,stars:5,rev:267,spec:'12C 5.6GHz AM5',specs:[['الأنوية','12'],['التردد','5.6GHz'],['المقبس','AM5']]},
+{id:'c23',cat:'cpu',brand:'amd',nameEn:'AMD Ryzen 9 7950X',name:'AMD Ryzen 9 7950X',price:1749,perf:82,stars:5,rev:198,spec:'16C 5.7GHz AM5',specs:[['الأنوية','16'],['التردد','5.7GHz'],['المقبس','AM5']]},
+{id:'c24',cat:'cpu',brand:'amd',nameEn:'AMD Ryzen 9 9950X',name:'AMD Ryzen 9 9950X',price:1999,perf:94,stars:5,rev:89,spec:'16C 5.7GHz Zen5 AM5',specs:[['الأنوية','16'],['التردد','5.7GHz'],['الجيل','Zen 5'],['المقبس','AM5']]},
+{id:'r0',cat:'ram',nameEn:'Kingston 4GB DDR3 1600MHz',name:'Kingston 4GB DDR3',price:59,perf:2,stars:3,rev:120,spec:'4GB DDR3 1600',specs:[['السعة','4GB'],['النوع','DDR3']]},
+{id:'r1',cat:'ram',nameEn:'Kingston 8GB DDR3 1866MHz',name:'Kingston 8GB DDR3',price:89,perf:5,stars:3,rev:90,spec:'8GB DDR3 1866',specs:[['السعة','8GB'],['النوع','DDR3']]},
+{id:'r2',cat:'ram',nameEn:'Kingston 8GB DDR4 2666MHz',name:'Kingston 8GB DDR4',price:99,perf:10,stars:3,rev:430,spec:'8GB DDR4 2666',specs:[['السعة','8GB'],['النوع','DDR4']]},
+{id:'r3',cat:'ram',nameEn:'Corsair Vengeance 16GB DDR4 3200MHz',name:'Corsair 16GB DDR4 3200',price:159,perf:20,stars:4,rev:520,spec:'16GB DDR4 3200',specs:[['السعة','16GB'],['النوع','DDR4']]},
+{id:'r4',cat:'ram',nameEn:'Corsair Vengeance 32GB DDR4 3200MHz',name:'Corsair 32GB DDR4 3200',price:249,perf:28,stars:5,rev:380,spec:'32GB DDR4 3200',specs:[['السعة','32GB'],['النوع','DDR4']]},
+{id:'r5',cat:'ram',nameEn:'G.Skill Trident Z 32GB DDR4 3600MHz',name:'G.Skill 32GB DDR4 3600',price:329,perf:36,stars:5,rev:290,spec:'32GB DDR4 3600',specs:[['السعة','32GB'],['النوع','DDR4']]},
+{id:'r6',cat:'ram',nameEn:'Kingston Fury 16GB DDR5 5600MHz',name:'Kingston Fury 16GB DDR5',price:189,perf:38,stars:4,rev:220,spec:'16GB DDR5 5600',specs:[['السعة','16GB'],['النوع','DDR5']]},
+{id:'r7',cat:'ram',nameEn:'Corsair Dominator 32GB DDR5 6000MHz',name:'Corsair 32GB DDR5 6000',price:379,perf:55,stars:5,rev:175,spec:'32GB DDR5 6000',specs:[['السعة','32GB'],['النوع','DDR5']]},
+{id:'r8',cat:'ram',nameEn:'G.Skill Trident Z5 32GB DDR5 6400MHz',name:'G.Skill 32GB DDR5 6400',price:449,perf:64,stars:5,rev:145,spec:'32GB DDR5 6400',specs:[['السعة','32GB'],['النوع','DDR5']]},
+{id:'r9',cat:'ram',nameEn:'G.Skill Trident Z5 64GB DDR5 6000MHz',name:'G.Skill 64GB DDR5 6000',price:799,perf:78,stars:5,rev:98,spec:'64GB DDR5 6000',specs:[['السعة','64GB'],['النوع','DDR5']]},
+{id:'r10',cat:'ram',nameEn:'Corsair Dominator 128GB DDR5 5600MHz',name:'Corsair 128GB DDR5',price:1599,perf:95,stars:5,rev:45,spec:'128GB DDR5 5600',specs:[['السعة','128GB'],['النوع','DDR5']]},
+{id:'s0',cat:'storage',nameEn:'Seagate 500GB HDD 5400RPM',name:'Seagate 500GB HDD',price:89,perf:2,stars:3,rev:200,spec:'500GB HDD',specs:[['السعة','500GB'],['النوع','HDD']]},
+{id:'s1',cat:'storage',nameEn:'Seagate BarraCuda 1TB HDD 7200RPM',name:'Seagate 1TB HDD',price:129,perf:5,stars:4,rev:580,spec:'1TB HDD 7200RPM',specs:[['السعة','1TB'],['النوع','HDD']]},
+{id:'s2',cat:'storage',nameEn:'Seagate BarraCuda 2TB HDD 7200RPM',name:'Seagate 2TB HDD',price:169,perf:7,stars:4,rev:460,spec:'2TB HDD',specs:[['السعة','2TB'],['النوع','HDD']]},
+{id:'s3',cat:'storage',nameEn:'Samsung 870 EVO 500GB SATA SSD',name:'Samsung 870 EVO 500GB',price:189,perf:28,stars:5,rev:620,spec:'500GB SATA SSD',specs:[['السعة','500GB'],['النوع','SATA SSD']]},
+{id:'s4',cat:'storage',nameEn:'Samsung 870 EVO 1TB SATA SSD',name:'Samsung 870 EVO 1TB',price:249,perf:32,stars:5,rev:720,spec:'1TB SATA SSD',specs:[['السعة','1TB'],['النوع','SATA SSD']]},
+{id:'s5',cat:'storage',nameEn:'WD Blue SN570 500GB NVMe M.2',name:'WD Blue SN570 500GB',price:189,perf:40,stars:4,rev:380,spec:'500GB NVMe PCIe3',specs:[['السعة','500GB'],['الواجهة','PCIe 3.0 NVMe']]},
+{id:'s6',cat:'storage',nameEn:'WD Black SN770 1TB NVMe M.2',name:'WD Black SN770 1TB',price:299,perf:56,stars:5,rev:410,spec:'1TB NVMe PCIe4',specs:[['السعة','1TB'],['الواجهة','PCIe 4.0 NVMe']]},
+{id:'s7',cat:'storage',nameEn:'Samsung 980 Pro 1TB NVMe M.2',name:'Samsung 980 Pro 1TB',price:349,perf:66,stars:5,rev:510,spec:'1TB NVMe PCIe4 7000MB/s',specs:[['السعة','1TB'],['الواجهة','PCIe 4.0 NVMe']]},
+{id:'s8',cat:'storage',nameEn:'Samsung 990 Pro 2TB NVMe M.2',name:'Samsung 990 Pro 2TB',price:449,perf:76,stars:5,rev:290,spec:'2TB NVMe PCIe4',specs:[['السعة','2TB'],['الواجهة','PCIe 4.0 NVMe']]},
+{id:'s9',cat:'storage',nameEn:'Crucial T705 2TB NVMe PCIe Gen 5',name:'Crucial T705 2TB PCIe5',price:699,perf:92,stars:5,rev:142,spec:'2TB PCIe5 14500MB/s',specs:[['السعة','2TB'],['الواجهة','PCIe 5.0 NVMe']]},
+{id:'s10',cat:'storage',nameEn:'WD Black SN850X 4TB NVMe M.2',name:'WD Black SN850X 4TB',price:849,perf:82,stars:5,rev:115,spec:'4TB NVMe PCIe4',specs:[['السعة','4TB'],['الواجهة','PCIe 4.0 NVMe']]},
+{id:'m0',cat:'mb',nameEn:'ASUS PRIME H510M-E LGA1200 DDR4',name:'ASUS H510M-E LGA1200',price:199,perf:5,stars:3,rev:180,spec:'H510 mATX DDR4 LGA1200',specs:[['الشريحة','Intel H510'],['المقبس','LGA1200']]},
+{id:'m1',cat:'mb',nameEn:'MSI PRO B760M-A WiFi DDR5 LGA1700',name:'MSI B760M-A DDR5',price:349,perf:22,stars:4,rev:310,spec:'B760 mATX DDR5 LGA1700',specs:[['الشريحة','Intel B760'],['المقبس','LGA1700']]},
+{id:'m2',cat:'mb',nameEn:'ASUS ROG Strix B760-F DDR5 LGA1700',name:'ASUS ROG B760-F DDR5',price:549,perf:36,stars:5,rev:240,spec:'B760 ATX DDR5 LGA1700',specs:[['الشريحة','Intel B760'],['المقبس','LGA1700']]},
+{id:'m3',cat:'mb',nameEn:'MSI MAG Z790 Tomahawk WiFi DDR5 LGA1700',name:'MSI Z790 Tomahawk',price:749,perf:52,stars:5,rev:320,spec:'Z790 ATX DDR5 LGA1700',specs:[['الشريحة','Intel Z790'],['المقبس','LGA1700']]},
+{id:'m4',cat:'mb',nameEn:'ASUS ROG MAXIMUS Z790 Hero DDR5',name:'ASUS ROG Z790 Hero',price:1199,perf:72,stars:5,rev:134,spec:'Z790 ATX DDR5 LGA1700',specs:[['الشريحة','Intel Z790'],['المقبس','LGA1700']]},
+{id:'m5',cat:'mb',nameEn:'MSI MEG Z890 ACE DDR5 LGA1851',name:'MSI MEG Z890 ACE',price:1399,perf:82,stars:5,rev:98,spec:'Z890 ATX DDR5 LGA1851',specs:[['الشريحة','Intel Z890'],['المقبس','LGA1851']]},
+{id:'m6',cat:'mb',nameEn:'ASUS PRIME B550M-A AM4 DDR4',name:'ASUS B550M-A DDR4 AM4',price:249,perf:14,stars:4,rev:290,spec:'B550 mATX DDR4 AM4',specs:[['الشريحة','AMD B550'],['المقبس','AM4']]},
+{id:'m7',cat:'mb',nameEn:'MSI MAG B550 Tomahawk AM4 DDR4',name:'MSI B550 Tomahawk',price:449,perf:30,stars:5,rev:380,spec:'B550 ATX DDR4 AM4',specs:[['الشريحة','AMD B550'],['المقبس','AM4']]},
+{id:'m8',cat:'mb',nameEn:'MSI MAG B650 Tomahawk WiFi AM5 DDR5',name:'MSI B650 Tomahawk AM5',price:549,perf:42,stars:5,rev:380,spec:'B650 ATX DDR5 AM5',specs:[['الشريحة','AMD B650'],['المقبس','AM5']]},
+{id:'m9',cat:'mb',nameEn:'ASUS ROG Crosshair X670E AM5 DDR5',name:'ASUS ROG X670E AM5',price:999,perf:68,stars:5,rev:145,spec:'X670E ATX DDR5 AM5',specs:[['الشريحة','AMD X670E'],['المقبس','AM5']]},
+{id:'m10',cat:'mb',nameEn:'MSI MEG X670E ACE AM5 DDR5',name:'MSI MEG X670E ACE',price:1299,perf:86,stars:5,rev:112,spec:'X670E ATX DDR5 AM5',specs:[['الشريحة','AMD X670E'],['المقبس','AM5']]},
+{id:'co0',cat:'cooling',nameEn:'Cooler Master Hyper 212 Black Edition 120mm',name:'Cooler Master Hyper 212',price:99,perf:15,stars:4,rev:850,spec:'هوائي 120mm 180W',specs:[['النوع','هوائي'],['TDP','180W']]},
+{id:'co1',cat:'cooling',nameEn:'be quiet Pure Rock 2 Black 120mm',name:'be quiet Pure Rock 2',price:129,perf:22,stars:4,rev:420,spec:'هوائي 120mm صامت',specs:[['النوع','هوائي'],['TDP','150W']]},
+{id:'co2',cat:'cooling',nameEn:'DeepCool AK620 Dual Tower 120mm',name:'DeepCool AK620',price:279,perf:48,stars:5,rev:560,spec:'هوائي مزدوج 260W',specs:[['النوع','هوائي مزدوج'],['TDP','260W']]},
+{id:'co3',cat:'cooling',nameEn:'Noctua NH-D15 Dual Tower 140mm',name:'Noctua NH-D15',price:349,perf:55,stars:5,rev:560,spec:'هوائي مزدوج 250W',specs:[['النوع','هوائي مزدوج'],['TDP','250W']]},
+{id:'co4',cat:'cooling',nameEn:'Corsair iCUE H100i RGB AIO 240mm',name:'Corsair H100i AIO 240mm',price:399,perf:62,stars:5,rev:480,spec:'مائي AIO 240mm',specs:[['النوع','مائي AIO'],['الراديتر','240mm']]},
+{id:'co5',cat:'cooling',nameEn:'Corsair iCUE H150i RGB AIO 360mm',name:'Corsair H150i AIO 360mm',price:549,perf:80,stars:5,rev:320,spec:'مائي AIO 360mm',specs:[['النوع','مائي AIO'],['الراديتر','360mm']]},
+{id:'co6',cat:'cooling',nameEn:'ASUS ROG Ryujin III 360mm AIO ARGB',name:'ASUS ROG Ryujin III 360mm',price:749,perf:90,stars:5,rev:180,spec:'مائي AIO 360mm ARGB',specs:[['النوع','مائي AIO'],['الراديتر','360mm']]},
+{id:'p0',cat:'psu',nameEn:'Corsair CV550 550W 80 Plus Bronze',name:'Corsair CV550 550W Bronze',price:179,perf:10,stars:3,rev:320,spec:'550W 80+ Bronze',specs:[['القدرة','550W'],['الكفاءة','80+ Bronze']]},
+{id:'p1',cat:'psu',nameEn:'EVGA GQ 650W 80 Plus Gold',name:'EVGA GQ 650W Gold',price:249,perf:28,stars:4,rev:280,spec:'650W 80+ Gold',specs:[['القدرة','650W'],['الكفاءة','80+ Gold']]},
+{id:'p2',cat:'psu',nameEn:'Seasonic Focus GX 750W 80 Plus Gold Full Modular',name:'Seasonic Focus 750W Gold',price:349,perf:45,stars:5,rev:380,spec:'750W 80+ Gold Full Mod',specs:[['القدرة','750W'],['الكفاءة','80+ Gold']]},
+{id:'p3',cat:'psu',nameEn:'Corsair RM850x 850W 80 Plus Gold Full Modular',name:'Corsair RM850x 850W',price:449,perf:58,stars:5,rev:340,spec:'850W 80+ Gold Full Mod',specs:[['القدرة','850W'],['الكفاءة','80+ Gold']]},
+{id:'p4',cat:'psu',nameEn:'be quiet Dark Power 12 1000W 80 Plus Platinum',name:'be quiet Dark Power 1000W',price:649,perf:72,stars:5,rev:220,spec:'1000W 80+ Platinum',specs:[['القدرة','1000W'],['الكفاءة','80+ Platinum']]},
+{id:'p5',cat:'psu',nameEn:'Seasonic Prime TX 1000W 80 Plus Titanium',name:'Seasonic Prime TX 1000W',price:849,perf:88,stars:5,rev:145,spec:'1000W 80+ Titanium',specs:[['القدرة','1000W'],['الكفاءة','80+ Titanium']]},
+{id:'p6',cat:'psu',nameEn:'Corsair HX1500i 1500W 80 Plus Platinum',name:'Corsair HX1500i 1500W',price:1199,perf:98,stars:5,rev:98,spec:'1500W 80+ Platinum',specs:[['القدرة','1500W'],['الكفاءة','80+ Platinum']]},
+{id:'ca0',cat:'case',nameEn:'Cooler Master MasterBox Q300L Mini Tower mATX',name:'Cooler Master Q300L Mini',price:179,perf:10,stars:3,rev:280,spec:'Mini Tower mATX',specs:[['الحجم','Mini Tower']]},
+{id:'ca1',cat:'case',nameEn:'NZXT H510 Flow Mid Tower ATX',name:'NZXT H510 Flow',price:249,perf:25,stars:4,rev:420,spec:'Mid Tower ATX',specs:[['الحجم','Mid Tower']]},
+{id:'ca2',cat:'case',nameEn:'Fractal Design Pop Air Mid Tower ATX',name:'Fractal Design Pop Air',price:299,perf:35,stars:4,rev:340,spec:'Mid Tower ATX',specs:[['الحجم','Mid Tower']]},
+{id:'ca3',cat:'case',nameEn:'Lian Li PC-O11 Dynamic EVO Mid Tower ATX',name:'Lian Li O11 Dynamic EVO',price:449,perf:55,stars:5,rev:520,spec:'Mid Tower ATX',specs:[['الحجم','Mid Tower']]},
+{id:'ca4',cat:'case',nameEn:'Phanteks Eclipse G500A Mid Tower ATX DRGB',name:'Phanteks G500A DRGB',price:499,perf:65,stars:5,rev:290,spec:'Mid Tower ATX RGB',specs:[['الحجم','Mid Tower']]},
+{id:'ca5',cat:'case',nameEn:'Corsair 7000D Airflow Full Tower ATX',name:'Corsair 7000D Full Tower',price:649,perf:78,stars:5,rev:180,spec:'Full Tower ATX',specs:[['الحجم','Full Tower']]},
+{id:'ca6',cat:'case',nameEn:'Lian Li O11 Vision Full Tower ATX',name:'Lian Li O11 Vision Full',price:799,perf:88,stars:5,rev:145,spec:'Full Tower ATX',specs:[['الحجم','Full Tower']]},
+{id:'ca7',cat:'case',nameEn:'Thermaltake Tower 900 Full Tower E-ATX',name:'Thermaltake Tower 900',price:999,perf:96,stars:5,rev:98,spec:'Full Tower E-ATX',specs:[['الحجم','Full Tower']]}
+];
+
+var CAT={
+  cpu:{name:'المعالجات',en:'CPU',icon:'⚡',brands:['amd','intel']},
+  gpu:{name:'كروت الشاشة',en:'GPU',icon:'🎮',brands:['amd','nvidia']},
+  ram:{name:'الذاكرة RAM',en:'Memory',icon:'💾',brands:[]},
+  storage:{name:'التخزين',en:'Storage',icon:'💿',brands:[]},
+  mb:{name:'اللوحات الأم',en:'Motherboards',icon:'🖥',brands:[]},
+  cooling:{name:'التبريد',en:'Cooling',icon:'❄️',brands:[]},
+  psu:{name:'مزود الطاقة',en:'PSU',icon:'🔌',brands:[]},
+  case:{name:'الهياكل',en:'Cases',icon:'📦',brands:[]}
+};
+
+// ══ STATE ══
+var bud=15000,curCat='cpu',sortDir='asc',brandF='',cart=[],aiH=[],catScroll=0;
+var SID='S'+Date.now().toString(36).toUpperCase();
+var SESS={id:SID,start:new Date().toISOString(),cart:[],events:[],done:false};
+
+// ══ UTILS ══
+function sar(n){return n.toLocaleString()+' ر.س';}
+function find(id){for(var i=0;i<P.length;i++)if(P[i].id===id)return P[i];return null;}
+function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2800);}
+function saveSess(){
+  SESS.cart=cart.map(function(c){return{id:c.id,name:c.name,price:c.price,qty:c.qty};});
+  try{var arr=JSON.parse(localStorage.getItem('h_sess')||'[]');var f=false;for(var i=0;i<arr.length;i++)if(arr[i].id===SID){arr[i]=SESS;f=true;break;}if(!f)arr.push(SESS);if(arr.length>100)arr=arr.slice(-100);localStorage.setItem('h_sess',JSON.stringify(arr));}catch(e){}
+}
+function logEv(ev,d){SESS.events.push({e:ev,d:d,t:new Date().toISOString()});saveSess();}
+logEv('view',{});
+
+// ══ COUNT CATEGORIES ══
+(function(){var ks=Object.keys(CAT);for(var i=0;i<ks.length;i++){var k=ks[i],el=document.getElementById('c-'+k);if(el){var cnt=0;for(var j=0;j<P.length;j++)if(P[j].cat===k)cnt++;el.textContent=cnt+' منتج';}}})();
+
+// ══ NAV ══
+function goHome(){document.getElementById('home').style.display='block';document.getElementById('catPage').classList.remove('open');document.getElementById('prodPage').classList.remove('open');document.body.style.overflow='';}
+function s2(id){goHome();setTimeout(function(){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},100);}
+
+// ══ BUDGET ══
+function updBud(v){
+  bud=parseInt(v);var pct=((bud-100)/(15000-100))*100;
+  var fl=document.getElementById('bFll'),kn=document.getElementById('bKnb'),vl=document.getElementById('bVl'),sl=document.getElementById('bsl');
+  if(fl)fl.style.width=pct+'%';if(kn)kn.style.right=(100-pct)+'%';if(vl)vl.textContent=sar(bud);if(sl)sl.value=bud;
+}
+function onBud(v){updBud(parseInt(v));renderProds();}
+
+// ══ CATEGORY ══
+function openCat(cat){
+  curCat=cat;brandF='';sortDir='asc';
+  var m=CAT[cat],el;
+  el=document.getElementById('crumb-cat');if(el)el.textContent=m.icon+' '+m.name;
+  el=document.getElementById('cp-title');if(el)el.textContent='منتجات '+m.name;
+  el=document.getElementById('cp-title-en');if(el)el.textContent=m.en;
+  var brow=document.getElementById('brow');if(brow)brow.style.display=m.brands.length?'flex':'none';
+  var ids=['bAMD','bIntel','bNV','sD'];for(var i=0;i<ids.length;i++){el=document.getElementById(ids[i]);if(el)el.classList.remove('on');}
+  el=document.getElementById('sA');if(el)el.classList.add('on');
+  bud=15000;updBud(15000);
+  document.getElementById('home').style.display='none';
+  var pg=document.getElementById('catPage');pg.classList.add('open');pg.scrollTop=0;
+  document.body.style.overflow='hidden';
+  renderProds();logEv('cat',{cat:cat});
+}
+function closeCat(){document.getElementById('catPage').classList.remove('open');document.getElementById('home').style.display='block';document.body.style.overflow='';}
+function setSort(d,btn){sortDir=d;var sa=document.getElementById('sA'),sd=document.getElementById('sD');if(sa)sa.classList.toggle('on',d==='asc');if(sd)sd.classList.toggle('on',d==='desc');renderProds();}
+function setV(cls,btn){document.querySelectorAll('.vb').forEach(function(b){b.classList.remove('on');});if(btn)btn.classList.add('on');var pg=document.getElementById('pg');if(pg)pg.className='pg'+(cls?' '+cls:'');}
+function tBrand(b,btn){if(brandF===b){brandF='';if(btn)btn.classList.remove('on');}else{brandF=b;['bAMD','bIntel','bNV'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.remove('on');});if(btn)btn.classList.add('on');}renderProds();}
+
+// ══ RENDER PRODUCTS ══
+function renderProds(){
+  var list=[];for(var i=0;i<P.length;i++)if(P[i].cat===curCat)list.push(P[i]);
+  if(brandF){var fl=[];for(var i=0;i<list.length;i++)if(list[i].brand===brandF)fl.push(list[i]);list=fl;}
+  list.sort(function(a,b){return sortDir==='asc'?a.perf-b.perf:b.perf-a.perf;});
+  var cnt=document.getElementById('cp-cnt');if(cnt)cnt.textContent='عرض '+list.length+' منتج';
+  var grid=document.getElementById('pg');if(!grid)return;
+  if(!list.length){grid.innerHTML='<div class="pg-empty">لا توجد منتجات</div>';return;}
+  var h='';
+  for(var i=0;i<list.length;i++){
+    var p=list[i],rank=i+1,inB=p.price<=bud;
+    var bp=Math.min(100,bud>0?Math.round((p.price/bud)*100):100);
+    var bc=inB?(bp<50?'var(--gn)':bp<80?'#f59e0b':'var(--rd)'):'var(--rd)';
+    var rkC=rank<=3?' r'+rank:'';
+    var br=p.brand==='intel'?'<span class="pc-br bi">INTEL</span>':p.brand==='amd'?'<span class="pc-br ba">AMD</span>':p.brand==='nvidia'?'<span class="pc-br bn">NVIDIA</span>':'';
+    var st='';for(var s=0;s<p.stars;s++)st+='★';for(var s=p.stars;s<5;s++)st+='<span>☆</span>';
+    h+='<div class="pc'+(inB?'':' dim')+'" onclick="openProd(\''+p.id+'\')">';
+    h+='<div class="pc-rk'+rkC+'">'+rank+'</div>'+br;
+    h+='<div class="pc-img" style="background:'+bgC(p)+'">'+getImg(p)+'<div class="pc-img-t">'+p.spec+'</div></div>';
+    h+='<div class="pc-b"><div class="pc-cat">'+CAT[p.cat].name+'</div><div class="pc-nm">'+p.name+'</div>';
+    h+='<div class="pc-sp">'+p.spec+'</div><div class="pc-st">'+st+' <span>('+p.rev+')</span></div>';
+    h+='<div class="pr-row"><span class="pr-l">الأداء</span><div class="pr-bar"><div class="pr-f" style="width:'+p.perf+'%"></div></div><span class="pr-p">'+p.perf+'%</span></div>';
+    h+='<div class="bd-row"><div class="bd-bar"><div style="height:100%;width:'+bp+'%;background:'+bc+';border-radius:2px"></div></div><span class="bd-st" style="color:'+(inB?'var(--gn)':'var(--rd)')+';">'+(inB?'ضمن':'فوق')+'</span></div>';
+    h+='<div class="pc-pr"><span class="pc-cur" style="color:'+(inB?'var(--g)':'var(--rd)')+'">'+sar(p.price)+'</span></div>';
+    h+='<div class="pc-acts"><button class="btn-add" onclick="event.stopPropagation();addCart(\''+p.id+'\',this)">🛒 سلة</button>';
+    h+='<button class="btn-eye" onclick="event.stopPropagation();openProd(\''+p.id+'\')">🔍</button></div></div></div>';
+  }
+  grid.innerHTML=h;
+}
+
+// ══ PRODUCT DETAIL ══
+function openProd(id){
+  var p=find(id);if(!p)return;
+  catScroll=document.getElementById('catPage').scrollTop;
+  var m=CAT[p.cat],el;
+  el=document.getElementById('p-crumb-cat');if(el)el.textContent=m.icon+' '+m.name;
+  el=document.getElementById('p-crumb-prod');if(el)el.textContent=p.name;
+  el=document.getElementById('p-name-ar');if(el)el.textContent=p.name;
+  el=document.getElementById('p-name-en');if(el)el.textContent=p.nameEn;
+  el=document.getElementById('backLbl');if(el)el.textContent='العودة - '+m.name;
+  el=document.getElementById('pd-body');if(el)el.innerHTML=buildPD(p);
+  document.getElementById('prodPage').classList.add('open');
+  document.getElementById('prodPage').scrollTop=0;
+  logEv('prod',{id:id});
+}
+function closeProd(){document.getElementById('prodPage').classList.remove('open');requestAnimationFrame(function(){document.getElementById('catPage').scrollTop=catScroll;});}
+function buildPD(p){
+  var inB=p.price<=bud;
+  var br=p.brand==='intel'?'<span class="pc-br bi" style="position:absolute;top:12px;left:12px;font-size:11px;padding:3px 10px;border-radius:7px">INTEL</span>':p.brand==='amd'?'<span class="pc-br ba" style="position:absolute;top:12px;left:12px;font-size:11px;padding:3px 10px;border-radius:7px">AMD</span>':p.brand==='nvidia'?'<span class="pc-br bn" style="position:absolute;top:12px;left:12px;font-size:11px;padding:3px 10px;border-radius:7px">NVIDIA</span>':'';
+  var tips={cpu:'تأكد من توافق المقبس مع اللوحة الأم.',gpu:'تحقق من TDP وقدرة مزود الطاقة.',ram:'تأكد من نوع DDR المدعوم.',storage:'NVMe أسرع من SATA بكثير.',cooling:'تحقق من توافق المقبس.',mb:'تأكد من DDR4 أو DDR5.',psu:'اختر طاقة تتجاوز احتياجك بـ 20%.',case:'تأكد من حجم اللوحة الأم.'};
+  var sps='';for(var i=0;i<p.specs.length;i++)sps+='<div class="spc-row"><span class="sk">'+p.specs[i][0]+'</span><span class="sv2">'+p.specs[i][1]+'</span></div>';
+  var rel=[];for(var i=0;i<P.length;i++)if(P[i].cat===p.cat&&P[i].id!==p.id)rel.push(P[i]);
+  rel.sort(function(a,b){return a.perf-b.perf;});rel=rel.slice(0,3);
+  var relH='';for(var i=0;i<rel.length;i++){var r=rel[i];relH+='<div class="rel-c" onclick="closeProd();setTimeout(function(){openProd(\''+r.id+'\');},50)">'+getImg(r)+'<div style="flex:1;min-width:0"><div class="rel-nm">'+r.name+'</div><div class="rel-pr" style="color:'+(r.price<=bud?'var(--g)':'var(--rd)')+'">'+sar(r.price)+'</div></div></div>';}
+  var h='<div class="pd-lay"><div>';
+  h+='<div class="pd-card"><div class="pd-imgb" style="background:'+bgC(p)+';position:relative"><div style="transform:scale(1.5)">'+getImg(p)+'</div>'+br+'</div>';
+  h+='<div class="pd-info"><div class="pd-en">'+p.nameEn+'</div><div class="pd-nm">'+p.name+'</div></div></div>';
+  h+='<div class="spc-card"><div class="spc-hd">المواصفات</div>'+sps+'</div></div>';
+  h+='<div class="pd-r"><div class="pd-pc">';
+  h+='<div class="pdp-l">السعر</div><div class="pdp-p" style="color:'+(inB?'var(--g)':'var(--rd)')+'">'+sar(p.price)+'</div>';
+  h+='<div style="margin-bottom:.85rem"></div>';
+  h+='<button class="sb sb-cart" onclick="addCart(\''+p.id+'\',this)"><span>🛒 أضف للسلة</span><span class="stg">'+sar(p.price)+'</span></button>';
+  h+='<div style="font-size:10px;color:var(--di);margin:.5rem 0 .75rem;border-top:1px solid var(--b);padding-top:.75rem">🌐 شراء من المتاجر</div>';
+  h+='<a class="sb sb-amz" href="'+getLnk(p.id,'amz')+'" target="_blank" rel="noopener"><span>📦 Amazon السعودية</span><span class="stg">فتح مباشر →</span></a>';
+  h+='<a class="sb sb-egg" href="'+getLnk(p.id,'egg')+'" target="_blank" rel="noopener"><span>💻 Newegg</span><span class="stg">فتح مباشر →</span></a>';
+  h+='<a class="sb sb-ali" href="'+getLnk(p.id,'ali')+'" target="_blank" rel="noopener"><span>🛒 AliExpress</span><span class="stg">فتح مباشر →</span></a>';
+  h+='</div><div class="ai-card"><div class="ai-ct">نصيحة</div><p class="ai-cp">'+(tips[p.cat]||'منتج ممتاز.')+'</p></div>';
+  h+='</div></div>';
+  if(rel.length)h+='<div class="rel-sec"><div class="rel-t">منتجات مشابهة</div><div class="rel-g">'+relH+'</div></div>';
+  return h;
+}
+
+// ══ CART ══
+function addCart(id,btn){
+  var p=find(id);if(!p)return;
+  var f=false;for(var i=0;i<cart.length;i++)if(cart[i].id===id){cart[i].qty++;f=true;break;}
+  if(!f)cart.push({id:p.id,name:p.name,price:p.price,cat:p.cat,qty:1,nameEn:p.nameEn||'',brand:p.brand||''});
+  var cn=document.getElementById('cn');if(cn){var t=0;for(var i=0;i<cart.length;i++)t+=cart[i].qty;cn.textContent=t;}
+  if(btn){btn.textContent='تمت!';btn.classList.add('done');setTimeout(function(){btn.textContent='🛒 سلة';btn.classList.remove('done');},2000);}
+  toast('تمت الاضافة: '+p.name);
+  logEv('add',{id:id});saveSess();
+}
+function openCart(){document.getElementById('cartOv').classList.add('open');document.getElementById('cartPn').classList.add('open');renderCart();}
+function closeCart(){document.getElementById('cartOv').classList.remove('open');document.getElementById('cartPn').classList.remove('open');}
+function renderCart(){
+  var el=document.getElementById('ci-wrap'),ft=document.getElementById('cart-ft');
+  if(!cart.length){el.innerHTML='<div class="ci-empty"><div style="font-size:3rem;margin-bottom:1rem">🛒</div><p>السلة فارغة</p></div>';ft.style.display='none';return;}
+  var h='';
+  for(var i=0;i<cart.length;i++){
+    var it=cart[i];
+    h+='<div class="ci"><div class="ci-img">'+getImg(it)+'</div>';
+    h+='<div class="ci-info"><div class="ci-nm">'+it.name+'</div><div class="ci-pr">'+sar(it.price*it.qty)+'</div>';
+    h+='<div class="ci-q"><button class="qb" onclick="chQ('+i+',-1)">-</button><span style="font-weight:700;font-size:12px;color:#fff;min-width:18px;text-align:center">'+it.qty+'</span><button class="qb" onclick="chQ('+i+',1)">+</button></div></div>';
+    h+='<button class="ci-del" onclick="rmCI('+i+')">&#128465;</button></div>';
+  }
+  el.innerHTML=h;
+  var tot=0;for(var i=0;i<cart.length;i++)tot+=cart[i].price*cart[i].qty;
+  var ct=document.getElementById('cart-tot');if(ct)ct.textContent=sar(tot);
+  ft.style.display='block';
+}
+function chQ(i,d){cart[i].qty+=d;if(cart[i].qty<=0)cart.splice(i,1);var cn=document.getElementById('cn');if(cn){var t=0;for(var i2=0;i2<cart.length;i2++)t+=cart[i2].qty;cn.textContent=t;}renderCart();saveSess();}
+function rmCI(i){cart.splice(i,1);var cn=document.getElementById('cn');if(cn){var t=0;for(var i2=0;i2<cart.length;i2++)t+=cart[i2].qty;cn.textContent=t;}renderCart();saveSess();}
+
+// ══ CHECKOUT ══
+var selPay='mada';
+function openCheckout(){
+  if(!cart.length){toast('السلة فارغة');return;}
+  var sc=document.getElementById('co-success');if(sc)sc.style.display='none';
+  var fw=document.getElementById('co-form-wrap');if(fw)fw.style.display='block';
+  document.getElementById('co-ovl').classList.add('open');
+  var tot=0;for(var i=0;i<cart.length;i++)tot+=cart[i].price*cart[i].qty;
+  var vat=Math.round(tot*0.15);
+  var h='';
+  for(var i=0;i<cart.length;i++)h+='<div class="co-item"><span>'+cart[i].name+' x'+cart[i].qty+'</span><span style="color:var(--g)">'+sar(cart[i].price*cart[i].qty)+'</span></div>';
+  h+='<div class="co-item"><span>ضريبة 15%</span><span>'+sar(vat)+'</span></div>';
+  h+='<div class="co-item"><span>الاجمالي</span><span>'+sar(tot+vat)+'</span></div>';
+  var ci=document.getElementById('co-items');if(ci)ci.innerHTML=h;
+}
+function closeCheckout(){document.getElementById('co-ovl').classList.remove('open');}
+function selPayMethod(m,el){selPay=m;document.querySelectorAll('.pay-opt').forEach(function(p){p.classList.remove('sel');});if(el)el.classList.add('sel');}
+function submitOrder(){
+  var nm=document.getElementById('co-name').value.trim();
+  var ph=document.getElementById('co-phone').value.trim();
+  var ad=document.getElementById('co-addr').value.trim();
+  var em=document.getElementById('co-email')?document.getElementById('co-email').value.trim():'';
+  if(!nm||!ph||!ad){toast('يرجى ملء الاسم والجوال والعنوان');return;}
+  if(ph.length<10){toast('رقم الجوال يجب ان يكون 10 ارقام');return;}
+  var btn=document.getElementById('co-submit-btn');
+  if(btn){btn.disabled=true;btn.textContent='جارٍ المعالجة...';}
+  setTimeout(function(){
+    var ref='ORD-'+Math.random().toString(36).substr(2,8).toUpperCase();
+    var tot=0;for(var i=0;i<cart.length;i++)tot+=cart[i].price*cart[i].qty;
+    var order={ref:ref,name:nm,phone:ph,email:em,addr:ad,pay:selPay,tot:tot,items:cart.map(function(c){return{id:c.id,name:c.name,price:c.price,qty:c.qty};}),date:new Date().toISOString()};
+    try{var o=JSON.parse(localStorage.getItem('h_orders')||'[]');o.push(order);localStorage.setItem('h_orders',JSON.stringify(o));}catch(e){}
+    SESS.done=true;logEv('order',{ref:ref,tot:tot});
+    var fw=document.getElementById('co-form-wrap');if(fw)fw.style.display='none';
+    var sc=document.getElementById('co-success');
+    if(sc){
+      sc.style.display='block';
+      var h='<div style="padding:2rem 1.5rem;text-align:center">';
+      h+='<div style="font-size:3.5rem;margin-bottom:1rem">✅</div>';
+      h+='<h3 style="font-family:Cairo,sans-serif;font-weight:900;font-size:1.2rem;color:var(--g);margin-bottom:.5rem">تم استلام طلبك!</h3>';
+      h+='<p style="font-size:13px;color:var(--mu);line-height:1.7">شكراً '+nm+'<br>سيتم التواصل معك على '+ph+'<br>خلال 24 ساعة لتأكيد الطلب</p>';
+      h+='<div style="background:var(--bg3);border:1px solid var(--b);border-radius:8px;padding:.75rem;margin:1rem 0;font-weight:700;color:var(--g);font-family:monospace">'+ref+'</div>';
+      h+='<button id="bkbtn" style="margin-top:1rem;background:linear-gradient(135deg,var(--g),var(--g2));border:none;border-radius:10px;padding:11px 24px;font-size:14px;font-weight:800;cursor:pointer;color:#06050a;font-family:Tajawal,sans-serif">العودة للمتجر</button>';
+      h+='</div>';
+      sc.innerHTML=h;
+      document.getElementById('bkbtn').onclick=function(){closeCheckout();cart=[];var cn=document.getElementById('cn');if(cn)cn.textContent=0;renderCart();};
+    }
+    if(btn){btn.disabled=false;btn.textContent='تأكيد الطلب';}
+  },1500);
+}
+
+// ══ AUTH ══
+function openAuth(tab){document.getElementById('authOv').classList.add('open');swAuthTab(tab);}
+function closeAuth(){document.getElementById('authOv').classList.remove('open');}
+function swAuthTab(t){
+  var lf=document.getElementById('loginF'),rf=document.getElementById('regF');
+  var al=document.getElementById('atL'),ar=document.getElementById('atR');
+  if(lf)lf.style.display=t==='login'?'block':'none';if(rf)rf.style.display=t==='reg'?'block':'none';
+  if(al)al.classList.toggle('on',t==='login');if(ar)ar.classList.toggle('on',t==='reg');
+}
+function doLogin(){var e=document.getElementById('lE').value,p=document.getElementById('lP').value;if(!e||!p){toast('يرجى ملء الحقول');return;}closeAuth();toast('مرحباً!');}
+function doReg(){var n=document.getElementById('rN').value,p=document.getElementById('rP').value,p2=document.getElementById('rP2').value;if(!n||!p){toast('يرجى ملء الحقول');return;}if(p!==p2){toast('كلمتا المرور غير متطابقتين');return;}closeAuth();toast('تم انشاء الحساب!');}
+function doSoc(pr){setTimeout(function(){closeAuth();toast('تم الدخول!');},600);}
+
+// ══ BUILDS ══
+var BUILDS=[
+  {cat:'eco',nm:'تجميعة الطالب الاقتصادية',bdg:'اقتصادية',bdgC:'eco',bg:'rgba(0,100,190,.1)',sv:'ci',
+   specs:['CPU: Intel Core i3-12100F','RAM: 16GB DDR4 3200MHz','SSD: 1TB SATA SSD','MB: MSI B760M DDR5','PSU: 550W 80+ Bronze'],
+   perf:[{n:'دراسة',p:92,c:'#22c55e'},{n:'العاب خفيفة',p:52,c:'#f59e0b'}],price:1450,old:1800,parts:['c2','r3','s4','m1','p0'],q:'Intel+Core+i3+12100F+PC+bundle'},
+  {cat:'eco',nm:'تجميعة البيت الاقتصادية AMD',bdg:'اقتصادية',bdgC:'eco',bg:'rgba(200,0,0,.1)',sv:'ca',
+   specs:['CPU: AMD Ryzen 5 5500','RAM: 16GB DDR4 3200MHz','SSD: 1TB SATA SSD','MB: ASUS B550M DDR4','PSU: 550W 80+ Bronze'],
+   perf:[{n:'يومي',p:95,c:'#22c55e'},{n:'العاب',p:48,c:'#f59e0b'}],price:1650,old:1950,parts:['c16','r3','s4','m6','p0'],q:'AMD+Ryzen+5+5500+PC+bundle'},
+  {cat:'mid',nm:'تجميعة المتوسط Intel + RTX 4060',bdg:'متوسطة',bdgC:'mid',bg:'rgba(20,100,20,.1)',sv:'gn',
+   specs:['CPU: Intel Core i5-13600K','GPU: NVIDIA RTX 4060 8GB','RAM: 32GB DDR5 6000','SSD: 1TB NVMe PCIe4','PSU: 750W 80+ Gold'],
+   perf:[{n:'1080p العاب',p:88,c:'#22c55e'},{n:'1440p العاب',p:65,c:'#f59e0b'}],price:3200,old:3800,parts:['c6','g11','r7','s6','m1','p2'],q:'Intel+i5+13600K+RTX+4060+mid+range'},
+  {cat:'mid',nm:'تجميعة AMD + RX 7700 XT',bdg:'متوسطة',bdgC:'mid',bg:'rgba(160,10,10,.1)',sv:'ga',
+   specs:['CPU: AMD Ryzen 5 7600X','GPU: AMD RX 7700 XT 12GB','RAM: 32GB DDR5 6000','SSD: 1TB NVMe PCIe4','PSU: 750W 80+ Gold'],
+   perf:[{n:'1080p العاب',p:90,c:'#22c55e'},{n:'1440p العاب',p:72,c:'#f59e0b'}],price:3500,old:4100,parts:['c18','g22','r7','s6','m8','p2'],q:'AMD+Ryzen+5+7600X+RX+7700+XT'},
+  {cat:'game',nm:'تجميعة القيمنق - RTX 4090',bdg:'قيمنق',bdgC:'game',bg:'rgba(20,80,20,.12)',sv:'gn',
+   specs:['CPU: AMD Ryzen 7 7800X3D','GPU: NVIDIA RTX 4090 24GB','RAM: 32GB DDR5 6000','SSD: 2TB NVMe PCIe5','PSU: 850W 80+ Gold'],
+   perf:[{n:'1080p FPS',p:99,c:'#22c55e'},{n:'4K Ultra',p:96,c:'#f59e0b'},{n:'Ray Tracing',p:98,c:'#8b5cf6'}],price:9500,old:12000,parts:['c21','g17','r7','s8','m8','p3'],q:'Ryzen+7+7800X3D+RTX+4090+gaming+PC'},
+  {cat:'game',nm:'تجميعة 4K - RTX 4080 Super',bdg:'قيمنق',bdgC:'game',bg:'rgba(20,80,20,.12)',sv:'gn',
+   specs:['CPU: Intel Core i7-14700K','GPU: NVIDIA RTX 4080 Super 16GB','RAM: 32GB DDR5 6000','SSD: 2TB NVMe PCIe4','PSU: 850W 80+ Gold'],
+   perf:[{n:'4K High',p:90,c:'#22c55e'},{n:'1440p Max',p:97,c:'#f59e0b'}],price:6800,old:8200,parts:['c9','g16','r7','s8','m3','p3'],q:'Intel+i7+14700K+RTX+4080+Super+4K'},
+  {cat:'pro',nm:'محطة العمل - i9 + RTX 4090',bdg:'احترافية',bdgC:'pro',bg:'rgba(20,80,20,.12)',sv:'gn',
+   specs:['CPU: Intel Core i9-14900K','GPU: NVIDIA RTX 4090 24GB','RAM: 64GB DDR5 6000','SSD: 2TB NVMe PCIe5','PSU: 1000W 80+ Platinum'],
+   perf:[{n:'رندر 3D',p:95,c:'#22c55e'},{n:'4K العاب',p:96,c:'#f59e0b'}],price:11500,old:14000,parts:['c11','g17','r9','s9','m4','p4'],q:'Intel+i9+14900K+RTX+4090+workstation'},
+  {cat:'pro',nm:'محطة العمل - Ryzen 9 7950X',bdg:'احترافية',bdgC:'pro',bg:'rgba(200,0,0,.1)',sv:'ca',
+   specs:['CPU: AMD Ryzen 9 7950X','GPU: NVIDIA RTX 4070 Ti Super','RAM: 64GB DDR5 6000','SSD: 2TB NVMe PCIe4','PSU: 1000W 80+ Titanium'],
+   perf:[{n:'رندر 3D',p:92,c:'#22c55e'},{n:'4K مونتاج',p:94,c:'#f59e0b'}],price:8500,old:10500,parts:['c23','g15','r9','s8','m9','p5'],q:'AMD+Ryzen+9+7950X+RTX+4070+Ti+workstation'},
+  {cat:'stream',nm:'تجميعة البث والمونتاج 4K',bdg:'بث وتصميم',bdgC:'stream',bg:'rgba(200,0,0,.1)',sv:'ca',
+   specs:['CPU: AMD Ryzen 9 9950X','GPU: NVIDIA RTX 4080 Super 16GB','RAM: 64GB DDR5 6400','SSD: 2TB PCIe5 + 4TB HDD','PSU: 1000W 80+ Titanium'],
+   perf:[{n:'بث 4K',p:98,c:'#22c55e'},{n:'تصدير 4K',p:95,c:'#f59e0b'}],price:9800,old:12000,parts:['c24','g16','r9','s9','m10','p5'],q:'AMD+Ryzen+9+9950X+RTX+4080+Super+streaming'}
+];
+
+function showB(cat,btn){
+  document.querySelectorAll('.btab').forEach(function(b){b.classList.remove('on');});
+  if(btn)btn.classList.add('on');
+  var list=cat==='all'?BUILDS:BUILDS.filter(function(b){return b.cat===cat;});
+  renderBuilds(list);
+}
+function renderBuilds(list){
+  var g=document.getElementById('bgrid');if(!g)return;
+  var h='';
+  for(var i=0;i<list.length;i++){
+    var b=list[i],q=encodeURIComponent(b.q);
+    h+='<div class="bcard">';
+    h+='<div class="bcard-img" style="background:'+b.bg+'">'+IMG[b.sv]+'<span class="bbdg '+b.bdgC+'">'+b.bdg+'</span></div>';
+    h+='<div class="bcard-body"><div class="bcard-nm">'+b.nm+'</div>';
+    h+='<div class="bspecs">';
+    for(var j=0;j<b.specs.length;j++)h+='<div class="bsp"><span class="bsp-v">'+b.specs[j]+'</span></div>';
+    h+='</div>';
+    h+='<div class="bperf-lbl">الاداء المتوقع</div><div class="bperf-rows">';
+    for(var j=0;j<b.perf.length;j++)h+='<div class="bpr"><span class="bpr-n">'+b.perf[j].n+'</span><div class="bpr-bar"><div class="bpr-f" style="width:'+b.perf[j].p+'%;background:'+b.perf[j].c+'"></div></div><span class="bpr-p">'+b.perf[j].p+'%</span></div>';
+    h+='</div>';
+    h+='<div class="bcard-price">';
+    if(b.old)h+='<span class="op">'+b.old.toLocaleString()+' ر.س</span> ';
+    h+=b.price.toLocaleString()+' ر.س</div>';
+    // ── زر إضافة التجميعة للسلة ──
+    h+='<button class="bcard-add" onclick="addBuild('+i+',this)">🛒 أضف التجميعة كاملة للسلة</button>';
+    h+='<div class="sbts">';
+    h+='<a class="sl-a amz" href="https://www.amazon.sa/s?k='+q+'" target="_blank" rel="noopener"><span class="sn">📦 Amazon</span><span class="sp">عرض</span></a>';
+    h+='<a class="sl-a egg" href="https://www.newegg.com/p/pl?q='+q+'" target="_blank" rel="noopener"><span class="sn">💻 Newegg</span><span class="sp">عرض</span></a>';
+    h+='<a class="sl-a ali" href="https://www.aliexpress.com/wholesale?SearchText='+q+'" target="_blank" rel="noopener"><span class="sn">🛒 AliExpress</span><span class="sp">عرض</span></a>';
+    h+='</div></div></div>';
+  }
+  g.innerHTML=h;
+}
+renderBuilds(BUILDS);
+
+function addBuild(idx,btn){
+  var b=BUILDS[idx];if(!b)return;
+  var parts=b.parts,added=0;
+  for(var i=0;i<parts.length;i++){
+    var pid=parts[i],p=find(pid);if(!p)continue;
+    var f=false;for(var j=0;j<cart.length;j++)if(cart[j].id===pid){cart[j].qty++;f=true;break;}
+    if(!f)cart.push({id:p.id,name:p.name,price:p.price,cat:p.cat,qty:1,nameEn:p.nameEn||'',brand:p.brand||''});
+    added++;
+  }
+  var cn=document.getElementById('cn');if(cn){var t=0;for(var i=0;i<cart.length;i++)t+=cart[i].qty;cn.textContent=t;}
+  if(btn){btn.textContent='تمت الاضافة! '+added+' قطعة ✓';btn.classList.add('ok');setTimeout(function(){btn.textContent='🛒 أضف التجميعة كاملة للسلة';btn.classList.remove('ok');},3000);}
+  toast('تمت اضافة '+added+' قطعة من تجميعة '+b.nm+'!');
+  logEv('build',{idx:idx,nm:b.nm});saveSess();
+}
+
+// ══ AI ══
+var AIS=['افضل جهاز العاب بـ 3000 ريال؟','ابنِ لي جهاز مونتاج','جهاز دراسة اقتصادي','افضل كارت للـ 4K؟'];
+function openAI(){document.getElementById('aiOvl').classList.add('open');if(!aiH.length){addAI('bot','مرحباً! انا مساعد الحاسب الذكي.\n\nاخبرني عن استخدامك وميزانيتك وساقترح افضل القطع!');showSugs();}}
+function closeAI(){document.getElementById('aiOvl').classList.remove('open');}
+function addAI(role,txt){
+  aiH.push({role:role,txt:txt});
+  var c=document.getElementById('ai-msgs');if(!c)return;
+  var d=document.createElement('div');d.className='am '+role;
+  d.innerHTML='<div class="am-b">'+txt.replace(/\n/g,'<br>')+'</div>';
+  c.appendChild(d);c.scrollTop=c.scrollHeight;
+}
+function showSugs(){var el=document.getElementById('ai-sgs');if(!el)return;var h='';for(var i=0;i<AIS.length;i++)h+='<button class="ai-sg" onclick="aiSend(\''+AIS[i]+'\')">'+AIS[i]+'</button>';el.innerHTML=h;}
+function sendAI(){var inp=document.getElementById('ai-inp');if(!inp)return;var t=inp.value.trim();if(!t)return;inp.value='';aiSend(t);}
+function aiSend(txt){
+  var sg=document.getElementById('ai-sgs');if(sg)sg.innerHTML='';
+  addAI('usr',txt);
+  var c=document.getElementById('ai-msgs');if(!c)return;
+  var ty=document.createElement('div');ty.className='ai-ty';ty.id='aiTy';
+  ty.innerHTML='<div class="td"></div><div class="td"></div><div class="td"></div>';
+  c.appendChild(ty);c.scrollTop=c.scrollHeight;
+  var inp=document.getElementById('ai-inp');if(inp)inp.disabled=true;
+  setTimeout(function(){
+    ty.remove();if(inp)inp.disabled=false;
+    addAI('bot',aiReply(txt));showSugs();
+  },700+Math.random()*400);
+}
+function aiReply(msg){
+  var m=msg.toLowerCase();
+  var isG=m.indexOf('العاب')>-1||m.indexOf('قيمنق')>-1||m.indexOf('gaming')>-1;
+  var isE=m.indexOf('مونتاج')>-1||m.indexOf('تصميم')>-1||m.indexOf('رندر')>-1;
+  var isS=m.indexOf('دراسة')>-1||m.indexOf('رخيص')>-1||m.indexOf('اقتصادي')>-1;
+  var is4=m.indexOf('4k')>-1;
+  if(isG){
+    var tc=null,tg=null;
+    for(var i=P.length-1;i>=0;i--){if(P[i].cat==='cpu'&&P[i].price<=bud*0.28){tc=P[i];break;}}
+    for(var i=P.length-1;i>=0;i--){if(P[i].cat==='gpu'&&P[i].price<=bud*0.45){tg=P[i];break;}}
+    if(!tc){for(var i=0;i<P.length;i++){if(P[i].id==='c6'){tc=P[i];break;}}}
+    if(!tg){for(var i=0;i<P.length;i++){if(P[i].id==='g11'){tg=P[i];break;}}}
+    var r='جهاز العاب - '+sar(bud)+':\n\n';
+    if(tc)r+='⚡ '+tc.name+' — '+sar(tc.price)+'\n';
+    if(tg)r+='🎮 '+tg.name+' — '+sar(tg.price)+'\n';
+    r+='💾 32GB DDR5\n💿 1TB NVMe';
+    return r;
+  }
+  if(isE) return 'جهاز مونتاج احترافي:\n\n⚡ Ryzen 9 7950X (16 نواة)\n🎮 RTX 4070 Ti Super\n💾 64GB DDR5\n💿 2TB NVMe';
+  if(isS) return 'جهاز دراسة اقتصادي:\n\n⚡ i3-12100F — '+sar(299)+'\n💾 16GB DDR4 — '+sar(159)+'\n💿 1TB SATA SSD — '+sar(249)+'\nالمجموع ~1,200 ر.س';
+  if(is4) return 'افضل كروت للـ 4K:\n\n🥇 RTX 4090 24GB — '+sar(5499)+'\n🥈 RTX 4080 Super — '+sar(3499)+'\n🥉 RX 7900 XTX — '+sar(3999);
+  var top=[];for(var i=P.length-1;i>=0&&top.length<2;i--)if(P[i].price<=bud)top.push(P[i]);
+  if(top.length)return 'افضل قطعتين بميزانيتك ('+sar(bud)+'):\n\n🥇 '+top[0].name+' — '+sar(top[0].price)+'\n🥈 '+top[1].name+' — '+sar(top[1].price);
+  return 'اخبرني عن استخدامك وميزانيتك وساعطيك توصية دقيقة!';
+}
+
+// ══ ADMIN PANEL ══
+var ADM_PW='SAIF-1122';
+function openAdm(){
+  var ap=localStorage.getItem('adm_ok');
+  if(ap!=='yes'){
+    var pw=prompt('كلمة المرور:');
+    if(pw!=='SAIF-1122'){toast('كلمة المرور غير صحيحة');return;}
+    localStorage.setItem('adm_ok','yes');
+  }
+  document.getElementById('admPanel').classList.add('open');
+  loadAdm('orders');
+}
+function closeAdm(){document.getElementById('admPanel').classList.remove('open');}
+function admTab(tab,btn){
+  document.querySelectorAll('.adm-tab').forEach(function(b){b.classList.remove('on');});
+  if(btn)btn.classList.add('on');
+  loadAdm(tab);
+}
+function loadAdm(tab){
+  var orders=[],sessions=[];
+  try{orders=JSON.parse(localStorage.getItem('h_orders')||'[]');}catch(e){}
+  try{sessions=JSON.parse(localStorage.getItem('h_sess')||'[]');}catch(e){}
+  var rev=0;for(var i=0;i<orders.length;i++)rev+=(orders[i].tot||0);
+  var aband=[],views=[];
+  for(var i=0;i<sessions.length;i++){
+    var s=sessions[i];
+    if(s.done)continue;
+    if(s.cart&&s.cart.length>0)aband.push(s);
+    else views.push(s);
+  }
+  var el;
+  el=document.getElementById('av1');if(el)el.textContent=orders.length+aband.length;
+  el=document.getElementById('av2');if(el)el.textContent=orders.length;
+  el=document.getElementById('av3');if(el)el.textContent=aband.length;
+  el=document.getElementById('av4');if(el)el.textContent=rev.toLocaleString();
+  var con=document.getElementById('admContent');if(!con)return;
+  if(tab==='orders'){
+    if(!orders.length){con.innerHTML='<div class="adm-empty">لا توجد طلبات مكتملة بعد</div>';return;}
+    var h='<div class="adm-mt">📦 الطلبات المكتملة ('+orders.length+')</div>';
+    h+='<table class="adm-tbl"><thead><tr><th>رقم الطلب</th><th>الاسم</th><th>الجوال</th><th>الايميل</th><th>المنتجات</th><th>الاجمالي</th><th>التاريخ</th><th>الحالة</th></tr></thead><tbody>';
+    for(var i=orders.length-1;i>=0;i--){
+      var o=orders[i];
+      var items='';
+      if(o.items&&o.items.length){for(var j=0;j<o.items.length;j++)items+=o.items[j].name+' x'+o.items[j].qty+'<br>';}
+      var dt=o.date?new Date(o.date).toLocaleDateString('ar-SA'):'-';
+      h+='<tr><td style="font-family:monospace;color:var(--g);font-size:11px">'+(o.ref||'-')+'</td>';
+      h+='<td>'+(o.name||'-')+'</td><td dir="ltr">'+(o.phone||'-')+'</td><td>'+(o.email||'-')+'</td>';
+      h+='<td style="font-size:11px;color:var(--mu)">'+items+'</td>';
+      h+='<td style="color:var(--g);font-weight:700">'+((o.tot||0).toLocaleString())+' ر.س</td>';
+      h+='<td style="font-size:11px">'+dt+'</td>';
+      h+='<td><span class="bdg bdg-ok">مكتمل</span></td></tr>';
+    }
+    h+='</tbody></table>';
+    con.innerHTML=h;
+  }
+  else if(tab==='carts'){
+    if(!aband.length){con.innerHTML='<div class="adm-empty">لا توجد سلات مهجورة</div>';return;}
+    var h='<div class="adm-mt">🛒 السلات المهجورة ('+aband.length+')</div>';
+    h+='<table class="adm-tbl"><thead><tr><th>Session</th><th>المنتجات في السلة</th><th>اجمالي السلة</th><th>وقت الزيارة</th><th>الحالة</th></tr></thead><tbody>';
+    for(var i=aband.length-1;i>=0;i--){
+      var s=aband[i],items=s.cart||[],tot=0;
+      for(var j=0;j<items.length;j++)tot+=(items[j].price||0)*(items[j].qty||1);
+      var prods='';for(var j=0;j<items.length;j++)prods+=items[j].name+' x'+items[j].qty+'<br>';
+      var dt=s.start?new Date(s.start).toLocaleString('ar-SA'):'-';
+      h+='<tr><td style="font-family:monospace;font-size:10px;color:var(--mu)">'+s.id+'</td>';
+      h+='<td style="font-size:11px;color:var(--mu)">'+prods+'</td>';
+      h+='<td style="color:#fb923c;font-weight:700">'+tot.toLocaleString()+' ر.س</td>';
+      h+='<td style="font-size:11px">'+dt+'</td>';
+      h+='<td><span class="bdg bdg-ab">مهجورة</span></td></tr>';
+    }
+    h+='</tbody></table>';
+    con.innerHTML=h;
+  }
+  else{
+    if(!views.length){con.innerHTML='<div class="adm-empty">لا توجد زيارات مسجلة</div>';return;}
+    var h='<div class="adm-mt">👁 الزوار بدون شراء ('+views.length+')</div>';
+    h+='<table class="adm-tbl"><thead><tr><th>Session</th><th>الاحداث</th><th>وقت الزيارة</th><th>الحالة</th></tr></thead><tbody>';
+    for(var i=views.length-1;i>=0;i--){
+      var s=views[i];
+      var evts=(s.events||[]).map(function(e){return e.e;}).join(', ')||'view';
+      var dt=s.start?new Date(s.start).toLocaleString('ar-SA'):'-';
+      h+='<tr><td style="font-family:monospace;font-size:10px;color:var(--mu)">'+s.id+'</td>';
+      h+='<td style="font-size:11px">'+evts+'</td>';
+      h+='<td style="font-size:11px">'+dt+'</td>';
+      h+='<td><span class="bdg bdg-vw">زيارة</span></td></tr>';
+    }
+    h+='</tbody></table>';
+    con.innerHTML=h;
+  }
+}
+// Double-click on shield button = open admin
+(function(){
+  var btns=document.querySelectorAll('.adm-cl');
+  for(var i=0;i<btns.length;i++){
+    btns[i].addEventListener('dblclick',function(){openAdm();});
+  }
+})();
+
+
+var LNKS={
+  'g0':{amz:'https://www.amazon.sa/s?k=NVIDIA+GTX+730+2GB+DDR3&i=electronics&rh=p_n_feature_browse-bin%3A5012139031',egg:'https://www.newegg.com/p/pl?q=GTX+730+2GB+GDDR5&N=100007709+4814',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=GTX+730+2GB+GPU+graphics+card'},
+  'g1':{amz:'https://www.amazon.sa/s?k=GTX+1050+Ti+4GB+GDDR5&i=electronics',egg:'https://www.newegg.com/p/pl?q=GTX+1050+Ti+4GB&N=100007709',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=GTX+1050+Ti+4GB+GDDR5'},
+  'g2':{amz:'https://www.amazon.sa/s?k=GTX+1060+6GB+GDDR5+graphics+card&i=electronics',egg:'https://www.newegg.com/p/pl?q=GTX+1060+6GB&N=100007709',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=GTX+1060+6GB+GDDR5+GPU'},
+  'g3':{amz:'https://www.amazon.sa/s?k=GTX+1070+8GB+GDDR5&i=electronics',egg:'https://www.newegg.com/p/pl?q=GTX+1070+8GB&N=100007709',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=GTX+1070+8GB+GDDR5'},
+  'g4':{amz:'https://www.amazon.sa/s?k=GTX+1080+Ti+11GB+GDDR5X&i=electronics',egg:'https://www.newegg.com/p/pl?q=GTX+1080+Ti+11GB&N=100007709',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=GTX+1080+Ti+11GB+GDDR5X'},
+  'g5':{amz:'https://www.amazon.sa/s?k=RTX+2060+6GB+GDDR6+graphics+card&i=electronics',egg:'https://www.newegg.com/p/pl?q=RTX+2060+6GB+GDDR6&N=100007709',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=RTX+2060+6GB+GDDR6+GPU'},
+  'g6':{amz:'https://www.amazon.sa/s?k=RTX+3050+8GB+GDDR6&i=electronics',egg:'https://www.newegg.com/p/pl?q=RTX+3050+8GB&N=100007709',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=RTX+3050+8GB+GDDR6'},
+  'g7':{amz:'https://www.amazon.sa/s?k=RTX+3060+12GB+GDDR6+graphics+card&i=electronics',egg:'https://www.newegg.com/p/pl?q=RTX+3060+12GB+GDDR6&N=100007709',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=RTX+3060+12GB+GDDR6+GPU'},
+  'g8':{amz:'https://www.amazon.sa/s?k=RTX+3060+Ti+8GB+GDDR6&i=electronics',egg:'https://www.newegg.com/p/pl?q=RTX+3060+Ti+8GB&N=100007709',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=RTX+3060+Ti+8GB+GDDR6'},
+  'g9':{amz:'https://www.amazon.sa/s?k=RTX+3070+8GB+GDDR6&i=electronics',egg:'https://www.newegg.com/p/pl?q=RTX+3070+8GB+GDDR6&N=100007709',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=RTX+3070+8GB+GDDR6+GPU'},
+  'g10':{amz:'https://www.amazon.sa/s?k=RTX+3080+10GB+GDDR6X&i=electronics',egg:'https://www.newegg.com/p/pl?q=RTX+3080+10GB+GDDR6X&N=100007709',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=RTX+3080+10GB+GDDR6X'},
+  'g11':{amz:'https://www.amazon.sa/s?k=RTX+4060+8GB+GDDR6+Ada+Lovelace&i=electronics',egg:'https://www.newegg.com/p/pl?q=RTX+4060+8GB+Ada+Lovelace&N=100007709',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=RTX+4060+8GB+Ada+Lovelace+GPU'},
+  'g12':{amz:'https://www.amazon.sa/s?k=RTX+4060+Ti+16GB+GDDR6&i=electronics',egg:'https://www.newegg.com/p/pl?q=RTX+4060+Ti+16GB&N=100007709',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=RTX+4060+Ti+16GB+GDDR6'},
+  'g13':{amz:'https://www.amazon.sa/s?k=RTX+4070+12GB+GDDR6X+Ada&i=electronics',egg:'https://www.newegg.com/p/pl?q=RTX+4070+12GB+GDDR6X+Ada&N=100007709',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=RTX+4070+12GB+GDDR6X+Ada+Lovelace'},
+  'g14':{amz:'https://www.amazon.sa/s?k=RTX+4070+Super+12GB+GDDR6X&i=electronics',egg:'https://www.newegg.com/p/pl?q=RTX+4070+Super+12GB&N=100007709',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=RTX+4070+Super+12GB+GDDR6X'},
+  'g15':{amz:'https://www.amazon.sa/s?k=RTX+4070+Ti+Super+16GB+GDDR6X&i=electronics',egg:'https://www.newegg.com/p/pl?q=RTX+4070+Ti+Super+16GB&N=100007709',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=RTX+4070+Ti+Super+16GB+GDDR6X'},
+  'g16':{amz:'https://www.amazon.sa/s?k=RTX+4080+Super+16GB+GDDR6X&i=electronics',egg:'https://www.newegg.com/p/pl?q=RTX+4080+Super+16GB+GDDR6X&N=100007709',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=RTX+4080+Super+16GB+GDDR6X'},
+  'g17':{amz:'https://www.amazon.sa/s?k=RTX+4090+24GB+GDDR6X+graphics+card&i=electronics',egg:'https://www.newegg.com/p/pl?q=RTX+4090+24GB+GDDR6X&N=100007709',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=RTX+4090+24GB+GDDR6X+GPU'},
+  'g18':{amz:'https://www.amazon.sa/s?k=RTX+5080+16GB+GDDR7+Blackwell&i=electronics',egg:'https://www.newegg.com/p/pl?q=RTX+5080+16GB+Blackwell&N=100007709',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=RTX+5080+16GB+GDDR7+Blackwell'},
+  'g19':{amz:'https://www.amazon.sa/s?k=RTX+5090+32GB+GDDR7+Blackwell&i=electronics',egg:'https://www.newegg.com/p/pl?q=RTX+5090+32GB+Blackwell&N=100007709',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=RTX+5090+32GB+GDDR7+Blackwell'},
+  'g20':{amz:'https://www.amazon.sa/s?k=AMD+RX+6600+8GB+GDDR6&i=electronics',egg:'https://www.newegg.com/p/pl?q=RX+6600+8GB+GDDR6&N=100007709',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=AMD+RX+6600+8GB+GDDR6+GPU'},
+  'g21':{amz:'https://www.amazon.sa/s?k=AMD+RX+6700+XT+12GB+GDDR6&i=electronics',egg:'https://www.newegg.com/p/pl?q=RX+6700+XT+12GB+GDDR6&N=100007709',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=AMD+RX+6700+XT+12GB+GDDR6'},
+  'g22':{amz:'https://www.amazon.sa/s?k=AMD+RX+7700+XT+12GB+GDDR6&i=electronics',egg:'https://www.newegg.com/p/pl?q=RX+7700+XT+12GB&N=100007709',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=AMD+RX+7700+XT+12GB+GDDR6'},
+  'g23':{amz:'https://www.amazon.sa/s?k=AMD+RX+7800+XT+16GB+GDDR6&i=electronics',egg:'https://www.newegg.com/p/pl?q=RX+7800+XT+16GB&N=100007709',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=AMD+RX+7800+XT+16GB+GDDR6'},
+  'g24':{amz:'https://www.amazon.sa/s?k=AMD+RX+7900+XTX+24GB+GDDR6&i=electronics',egg:'https://www.newegg.com/p/pl?q=RX+7900+XTX+24GB+GDDR6&N=100007709',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=AMD+RX+7900+XTX+24GB+GDDR6'},
+  'c0':{amz:'https://www.amazon.sa/s?k=Intel+Celeron+G5905+LGA1200+processor&i=electronics',egg:'https://www.newegg.com/p/pl?q=Celeron+G5905+LGA1200&N=100007625',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Intel+Celeron+G5905+LGA1200+CPU'},
+  'c1':{amz:'https://www.amazon.sa/s?k=Intel+Core+i3+10100F+LGA1200&i=electronics',egg:'https://www.newegg.com/p/pl?q=i3-10100F+LGA1200&N=100007625',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Intel+i3+10100F+LGA1200+processor'},
+  'c2':{amz:'https://www.amazon.sa/s?k=Intel+Core+i3+12100F+LGA1700&i=electronics',egg:'https://www.newegg.com/p/pl?q=i3-12100F+LGA1700&N=100007625',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Intel+Core+i3+12100F+LGA1700'},
+  'c3':{amz:'https://www.amazon.sa/s?k=Intel+Core+i3+13100+LGA1700&i=electronics',egg:'https://www.newegg.com/p/pl?q=i3-13100+LGA1700&N=100007625',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Intel+i3+13100+LGA1700+CPU'},
+  'c4':{amz:'https://www.amazon.sa/s?k=Intel+Core+i5+12400F+LGA1700&i=electronics',egg:'https://www.newegg.com/p/pl?q=i5-12400F+LGA1700&N=100007625',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Intel+Core+i5+12400F+LGA1700'},
+  'c5':{amz:'https://www.amazon.sa/s?k=Intel+Core+i5+13400F+LGA1700&i=electronics',egg:'https://www.newegg.com/p/pl?q=i5-13400F+LGA1700&N=100007625',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Intel+Core+i5+13400F+LGA1700'},
+  'c6':{amz:'https://www.amazon.sa/s?k=Intel+Core+i5+13600K+LGA1700+Raptor+Lake&i=electronics',egg:'https://www.newegg.com/p/pl?q=i5-13600K+Raptor+Lake&N=100007625',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Intel+i5+13600K+LGA1700+Raptor+Lake'},
+  'c7':{amz:'https://www.amazon.sa/s?k=Intel+Core+i5+14600K+LGA1700&i=electronics',egg:'https://www.newegg.com/p/pl?q=i5-14600K+LGA1700&N=100007625',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Intel+Core+i5+14600K+LGA1700'},
+  'c8':{amz:'https://www.amazon.sa/s?k=Intel+Core+i7+13700K+LGA1700+Raptor+Lake&i=electronics',egg:'https://www.newegg.com/p/pl?q=i7-13700K+LGA1700&N=100007625',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Intel+i7+13700K+LGA1700+Raptor'},
+  'c9':{amz:'https://www.amazon.sa/s?k=Intel+Core+i7+14700K+LGA1700&i=electronics',egg:'https://www.newegg.com/p/pl?q=i7-14700K+LGA1700&N=100007625',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Intel+Core+i7+14700K+LGA1700'},
+  'c10':{amz:'https://www.amazon.sa/s?k=Intel+Core+i9+13900K+LGA1700+Raptor+Lake&i=electronics',egg:'https://www.newegg.com/p/pl?q=i9-13900K+Raptor+Lake&N=100007625',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Intel+i9+13900K+LGA1700+Raptor'},
+  'c11':{amz:'https://www.amazon.sa/s?k=Intel+Core+i9+14900K+LGA1700&i=electronics',egg:'https://www.newegg.com/p/pl?q=i9-14900K+LGA1700&N=100007625',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Intel+Core+i9+14900K+LGA1700'},
+  'c12':{amz:'https://www.amazon.sa/s?k=Intel+Core+Ultra+7+265K+LGA1851+Arrow+Lake&i=electronics',egg:'https://www.newegg.com/p/pl?q=Core+Ultra+7+265K+Arrow+Lake&N=100007625',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Intel+Core+Ultra+7+265K+LGA1851'},
+  'c13':{amz:'https://www.amazon.sa/s?k=Intel+Core+Ultra+9+285K+LGA1851+Arrow+Lake&i=electronics',egg:'https://www.newegg.com/p/pl?q=Core+Ultra+9+285K+Arrow+Lake&N=100007625',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Intel+Core+Ultra+9+285K+LGA1851'},
+  'c14':{amz:'https://www.amazon.sa/s?k=AMD+Ryzen+3+3200G+AM4+APU+Vega&i=electronics',egg:'https://www.newegg.com/p/pl?q=Ryzen+3+3200G+AM4&N=100007625',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=AMD+Ryzen+3+3200G+AM4+Vega+8'},
+  'c15':{amz:'https://www.amazon.sa/s?k=AMD+Ryzen+3+4100+AM4+Zen+2&i=electronics',egg:'https://www.newegg.com/p/pl?q=Ryzen+3+4100+AM4&N=100007625',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=AMD+Ryzen+3+4100+AM4+Zen2'},
+  'c16':{amz:'https://www.amazon.sa/s?k=AMD+Ryzen+5+5500+AM4+Zen+3&i=electronics',egg:'https://www.newegg.com/p/pl?q=Ryzen+5+5500+AM4+Zen+3&N=100007625',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=AMD+Ryzen+5+5500+AM4+Zen3'},
+  'c17':{amz:'https://www.amazon.sa/s?k=AMD+Ryzen+5+5600X+AM4+Zen+3&i=electronics',egg:'https://www.newegg.com/p/pl?q=Ryzen+5+5600X+AM4+Zen+3&N=100007625',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=AMD+Ryzen+5+5600X+AM4+Zen3'},
+  'c18':{amz:'https://www.amazon.sa/s?k=AMD+Ryzen+5+7600X+AM5+Zen+4&i=electronics',egg:'https://www.newegg.com/p/pl?q=Ryzen+5+7600X+AM5+Zen+4&N=100007625',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=AMD+Ryzen+5+7600X+AM5+Zen4'},
+  'c19':{amz:'https://www.amazon.sa/s?k=AMD+Ryzen+7+5700X+AM4+Zen+3&i=electronics',egg:'https://www.newegg.com/p/pl?q=Ryzen+7+5700X+AM4&N=100007625',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=AMD+Ryzen+7+5700X+AM4+Zen3'},
+  'c20':{amz:'https://www.amazon.sa/s?k=AMD+Ryzen+7+7700X+AM5+Zen+4&i=electronics',egg:'https://www.newegg.com/p/pl?q=Ryzen+7+7700X+AM5+Zen+4&N=100007625',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=AMD+Ryzen+7+7700X+AM5+Zen4'},
+  'c21':{amz:'https://www.amazon.sa/s?k=AMD+Ryzen+7+7800X3D+AM5+3D+V-Cache&i=electronics',egg:'https://www.newegg.com/p/pl?q=Ryzen+7+7800X3D+AM5+3D+V-Cache&N=100007625',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=AMD+Ryzen+7+7800X3D+AM5+3D+VCache'},
+  'c22':{amz:'https://www.amazon.sa/s?k=AMD+Ryzen+9+7900X+AM5+Zen+4&i=electronics',egg:'https://www.newegg.com/p/pl?q=Ryzen+9+7900X+AM5+Zen+4&N=100007625',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=AMD+Ryzen+9+7900X+AM5+Zen4'},
+  'c23':{amz:'https://www.amazon.sa/s?k=AMD+Ryzen+9+7950X+AM5+Zen+4&i=electronics',egg:'https://www.newegg.com/p/pl?q=Ryzen+9+7950X+AM5+Zen+4&N=100007625',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=AMD+Ryzen+9+7950X+AM5+Zen4'},
+  'c24':{amz:'https://www.amazon.sa/s?k=AMD+Ryzen+9+9950X+AM5+Zen+5&i=electronics',egg:'https://www.newegg.com/p/pl?q=Ryzen+9+9950X+AM5+Zen+5&N=100007625',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=AMD+Ryzen+9+9950X+AM5+Zen5'},
+  'r0':{amz:'https://www.amazon.sa/s?k=Kingston+4GB+DDR3+1600MHz+RAM&i=electronics',egg:'https://www.newegg.com/p/pl?q=4GB+DDR3+1600MHz+Kingston&N=100007611',ali:'https://www.aliexpress.com/wholesale?catId=523&SearchText=Kingston+4GB+DDR3+1600MHz+desktop+RAM'},
+  'r1':{amz:'https://www.amazon.sa/s?k=Kingston+8GB+DDR3+1866MHz+RAM&i=electronics',egg:'https://www.newegg.com/p/pl?q=8GB+DDR3+1866MHz+Kingston&N=100007611',ali:'https://www.aliexpress.com/wholesale?catId=523&SearchText=Kingston+8GB+DDR3+1866MHz+RAM'},
+  'r2':{amz:'https://www.amazon.sa/s?k=Kingston+8GB+DDR4+2666MHz+RAM&i=electronics',egg:'https://www.newegg.com/p/pl?q=8GB+DDR4+2666MHz+Kingston&N=100007611',ali:'https://www.aliexpress.com/wholesale?catId=523&SearchText=Kingston+8GB+DDR4+2666MHz+RAM'},
+  'r3':{amz:'https://www.amazon.sa/s?k=Corsair+Vengeance+16GB+DDR4+3200MHz&i=electronics',egg:'https://www.newegg.com/p/pl?q=Corsair+Vengeance+16GB+DDR4+3200&N=100007611',ali:'https://www.aliexpress.com/wholesale?catId=523&SearchText=Corsair+Vengeance+16GB+DDR4+3200MHz'},
+  'r4':{amz:'https://www.amazon.sa/s?k=Corsair+Vengeance+32GB+DDR4+3200MHz&i=electronics',egg:'https://www.newegg.com/p/pl?q=Corsair+Vengeance+32GB+DDR4+3200&N=100007611',ali:'https://www.aliexpress.com/wholesale?catId=523&SearchText=Corsair+Vengeance+32GB+DDR4+3200MHz'},
+  'r5':{amz:'https://www.amazon.sa/s?k=G.Skill+Trident+Z+32GB+DDR4+3600MHz&i=electronics',egg:'https://www.newegg.com/p/pl?q=GSkill+Trident+Z+32GB+DDR4+3600&N=100007611',ali:'https://www.aliexpress.com/wholesale?catId=523&SearchText=GSkill+Trident+Z+32GB+DDR4+3600MHz'},
+  'r6':{amz:'https://www.amazon.sa/s?k=Kingston+Fury+Beast+16GB+DDR5+5600MHz&i=electronics',egg:'https://www.newegg.com/p/pl?q=Kingston+Fury+16GB+DDR5+5600&N=100007611',ali:'https://www.aliexpress.com/wholesale?catId=523&SearchText=Kingston+Fury+Beast+16GB+DDR5+5600MHz'},
+  'r7':{amz:'https://www.amazon.sa/s?k=Corsair+Dominator+32GB+DDR5+6000MHz&i=electronics',egg:'https://www.newegg.com/p/pl?q=Corsair+Dominator+32GB+DDR5+6000&N=100007611',ali:'https://www.aliexpress.com/wholesale?catId=523&SearchText=Corsair+Dominator+32GB+DDR5+6000MHz'},
+  'r8':{amz:'https://www.amazon.sa/s?k=G.Skill+Trident+Z5+32GB+DDR5+6400MHz&i=electronics',egg:'https://www.newegg.com/p/pl?q=GSkill+Trident+Z5+32GB+DDR5+6400&N=100007611',ali:'https://www.aliexpress.com/wholesale?catId=523&SearchText=GSkill+Trident+Z5+32GB+DDR5+6400MHz'},
+  'r9':{amz:'https://www.amazon.sa/s?k=G.Skill+Trident+Z5+64GB+DDR5+6000MHz&i=electronics',egg:'https://www.newegg.com/p/pl?q=GSkill+Trident+Z5+64GB+DDR5&N=100007611',ali:'https://www.aliexpress.com/wholesale?catId=523&SearchText=GSkill+Trident+Z5+64GB+DDR5+6000MHz'},
+  'r10':{amz:'https://www.amazon.sa/s?k=Corsair+Dominator+128GB+DDR5+5600MHz&i=electronics',egg:'https://www.newegg.com/p/pl?q=Corsair+Dominator+128GB+DDR5&N=100007611',ali:'https://www.aliexpress.com/wholesale?catId=523&SearchText=Corsair+Dominator+128GB+DDR5+5600MHz'},
+  's0':{amz:'https://www.amazon.sa/s?k=Seagate+Barracuda+500GB+HDD+SATA&i=electronics',egg:'https://www.newegg.com/p/pl?q=Seagate+500GB+HDD+7200RPM&N=100167523',ali:'https://www.aliexpress.com/wholesale?catId=11&SearchText=Seagate+500GB+HDD+SATA+desktop'},
+  's1':{amz:'https://www.amazon.sa/s?k=Seagate+Barracuda+1TB+HDD+7200RPM+SATA&i=electronics',egg:'https://www.newegg.com/p/pl?q=Seagate+1TB+HDD+7200RPM&N=100167523',ali:'https://www.aliexpress.com/wholesale?catId=11&SearchText=Seagate+BarraCuda+1TB+HDD+7200RPM'},
+  's2':{amz:'https://www.amazon.sa/s?k=Seagate+Barracuda+2TB+HDD+7200RPM&i=electronics',egg:'https://www.newegg.com/p/pl?q=Seagate+2TB+HDD+7200RPM&N=100167523',ali:'https://www.aliexpress.com/wholesale?catId=11&SearchText=Seagate+BarraCuda+2TB+HDD+7200RPM'},
+  's3':{amz:'https://www.amazon.sa/s?k=Samsung+870+EVO+500GB+SATA+SSD&i=electronics',egg:'https://www.newegg.com/p/pl?q=Samsung+870+EVO+500GB+SATA&N=100167523',ali:'https://www.aliexpress.com/wholesale?catId=11&SearchText=Samsung+870+EVO+500GB+SATA+SSD'},
+  's4':{amz:'https://www.amazon.sa/s?k=Samsung+870+EVO+1TB+SATA+SSD&i=electronics',egg:'https://www.newegg.com/p/pl?q=Samsung+870+EVO+1TB+SATA&N=100167523',ali:'https://www.aliexpress.com/wholesale?catId=11&SearchText=Samsung+870+EVO+1TB+SATA+SSD'},
+  's5':{amz:'https://www.amazon.sa/s?k=WD+Blue+SN570+500GB+NVMe+M.2+PCIe+Gen3&i=electronics',egg:'https://www.newegg.com/p/pl?q=WD+Blue+SN570+500GB+NVMe&N=100167523',ali:'https://www.aliexpress.com/wholesale?catId=11&SearchText=WD+Blue+SN570+500GB+NVMe+M2'},
+  's6':{amz:'https://www.amazon.sa/s?k=WD+Black+SN770+1TB+NVMe+M.2+PCIe+Gen4&i=electronics',egg:'https://www.newegg.com/p/pl?q=WD+Black+SN770+1TB+NVMe&N=100167523',ali:'https://www.aliexpress.com/wholesale?catId=11&SearchText=WD+Black+SN770+1TB+NVMe+PCIe4'},
+  's7':{amz:'https://www.amazon.sa/s?k=Samsung+980+Pro+1TB+NVMe+M.2+PCIe+Gen4&i=electronics',egg:'https://www.newegg.com/p/pl?q=Samsung+980+Pro+1TB+NVMe+PCIe4&N=100167523',ali:'https://www.aliexpress.com/wholesale?catId=11&SearchText=Samsung+980+Pro+1TB+NVMe+M2+PCIe4'},
+  's8':{amz:'https://www.amazon.sa/s?k=Samsung+990+Pro+2TB+NVMe+M.2+PCIe+Gen4&i=electronics',egg:'https://www.newegg.com/p/pl?q=Samsung+990+Pro+2TB+NVMe&N=100167523',ali:'https://www.aliexpress.com/wholesale?catId=11&SearchText=Samsung+990+Pro+2TB+NVMe+PCIe4'},
+  's9':{amz:'https://www.amazon.sa/s?k=Crucial+T705+2TB+NVMe+M.2+PCIe+Gen5&i=electronics',egg:'https://www.newegg.com/p/pl?q=Crucial+T705+2TB+NVMe+PCIe5&N=100167523',ali:'https://www.aliexpress.com/wholesale?catId=11&SearchText=Crucial+T705+2TB+NVMe+M2+PCIe5'},
+  's10':{amz:'https://www.amazon.sa/s?k=WD+Black+SN850X+4TB+NVMe+M.2+PCIe+Gen4&i=electronics',egg:'https://www.newegg.com/p/pl?q=WD+Black+SN850X+4TB+NVMe&N=100167523',ali:'https://www.aliexpress.com/wholesale?catId=11&SearchText=WD+Black+SN850X+4TB+NVMe+PCIe4'},
+  'm0':{amz:'https://www.amazon.sa/s?k=ASUS+PRIME+H510M-E+LGA1200+DDR4+mATX&i=electronics',egg:'https://www.newegg.com/p/pl?q=ASUS+PRIME+H510M-E+LGA1200&N=100007706',ali:'https://www.aliexpress.com/wholesale?catId=23&SearchText=ASUS+PRIME+H510M+LGA1200+DDR4+mATX'},
+  'm1':{amz:'https://www.amazon.sa/s?k=MSI+PRO+B760M-A+WiFi+DDR5+LGA1700&i=electronics',egg:'https://www.newegg.com/p/pl?q=MSI+PRO+B760M-A+DDR5+LGA1700&N=100007706',ali:'https://www.aliexpress.com/wholesale?catId=23&SearchText=MSI+B760M+DDR5+LGA1700+WiFi'},
+  'm2':{amz:'https://www.amazon.sa/s?k=ASUS+ROG+Strix+B760-F+DDR5+LGA1700+WiFi&i=electronics',egg:'https://www.newegg.com/p/pl?q=ASUS+ROG+Strix+B760-F+DDR5&N=100007706',ali:'https://www.aliexpress.com/wholesale?catId=23&SearchText=ASUS+ROG+Strix+B760+DDR5+LGA1700'},
+  'm3':{amz:'https://www.amazon.sa/s?k=MSI+MAG+Z790+Tomahawk+WiFi+DDR5+LGA1700&i=electronics',egg:'https://www.newegg.com/p/pl?q=MSI+MAG+Z790+Tomahawk+DDR5&N=100007706',ali:'https://www.aliexpress.com/wholesale?catId=23&SearchText=MSI+Z790+Tomahawk+DDR5+LGA1700+WiFi'},
+  'm4':{amz:'https://www.amazon.sa/s?k=ASUS+ROG+MAXIMUS+Z790+Hero+DDR5+LGA1700&i=electronics',egg:'https://www.newegg.com/p/pl?q=ASUS+ROG+MAXIMUS+Z790+Hero+DDR5&N=100007706',ali:'https://www.aliexpress.com/wholesale?catId=23&SearchText=ASUS+ROG+MAXIMUS+Z790+Hero+DDR5'},
+  'm5':{amz:'https://www.amazon.sa/s?k=MSI+MEG+Z890+ACE+DDR5+LGA1851&i=electronics',egg:'https://www.newegg.com/p/pl?q=MSI+MEG+Z890+ACE+DDR5+LGA1851&N=100007706',ali:'https://www.aliexpress.com/wholesale?catId=23&SearchText=MSI+MEG+Z890+ACE+DDR5+LGA1851'},
+  'm6':{amz:'https://www.amazon.sa/s?k=ASUS+PRIME+B550M-A+AM4+DDR4+mATX&i=electronics',egg:'https://www.newegg.com/p/pl?q=ASUS+PRIME+B550M-A+AM4+DDR4&N=100007706',ali:'https://www.aliexpress.com/wholesale?catId=23&SearchText=ASUS+PRIME+B550M+AM4+DDR4+mATX'},
+  'm7':{amz:'https://www.amazon.sa/s?k=MSI+MAG+B550+Tomahawk+AM4+DDR4+ATX&i=electronics',egg:'https://www.newegg.com/p/pl?q=MSI+MAG+B550+Tomahawk+AM4+DDR4&N=100007706',ali:'https://www.aliexpress.com/wholesale?catId=23&SearchText=MSI+MAG+B550+Tomahawk+AM4+DDR4'},
+  'm8':{amz:'https://www.amazon.sa/s?k=MSI+MAG+B650+Tomahawk+WiFi+AM5+DDR5&i=electronics',egg:'https://www.newegg.com/p/pl?q=MSI+MAG+B650+Tomahawk+DDR5+AM5&N=100007706',ali:'https://www.aliexpress.com/wholesale?catId=23&SearchText=MSI+B650+Tomahawk+AM5+DDR5+WiFi'},
+  'm9':{amz:'https://www.amazon.sa/s?k=ASUS+ROG+Crosshair+X670E+Gene+AM5+DDR5&i=electronics',egg:'https://www.newegg.com/p/pl?q=ASUS+ROG+Crosshair+X670E+AM5+DDR5&N=100007706',ali:'https://www.aliexpress.com/wholesale?catId=23&SearchText=ASUS+ROG+Crosshair+X670E+AM5+DDR5'},
+  'm10':{amz:'https://www.amazon.sa/s?k=MSI+MEG+X670E+ACE+AM5+DDR5&i=electronics',egg:'https://www.newegg.com/p/pl?q=MSI+MEG+X670E+ACE+AM5+DDR5&N=100007706',ali:'https://www.aliexpress.com/wholesale?catId=23&SearchText=MSI+MEG+X670E+ACE+AM5+DDR5'},
+  'co0':{amz:'https://www.amazon.sa/s?k=Cooler+Master+Hyper+212+Black+Edition+120mm&i=electronics',egg:'https://www.newegg.com/p/pl?q=Cooler+Master+Hyper+212+Black&N=100007620',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Cooler+Master+Hyper+212+Black+Edition+CPU+cooler'},
+  'co1':{amz:'https://www.amazon.sa/s?k=be+quiet+Pure+Rock+2+Black+120mm&i=electronics',egg:'https://www.newegg.com/p/pl?q=be+quiet+Pure+Rock+2+Black&N=100007620',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=be+quiet+Pure+Rock+2+Black+CPU+cooler'},
+  'co2':{amz:'https://www.amazon.sa/s?k=DeepCool+AK620+Dual+Tower+CPU+Cooler&i=electronics',egg:'https://www.newegg.com/p/pl?q=DeepCool+AK620+Dual+Tower&N=100007620',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=DeepCool+AK620+Dual+Tower+CPU+cooler'},
+  'co3':{amz:'https://www.amazon.sa/s?k=Noctua+NH-D15+Dual+Tower+140mm&i=electronics',egg:'https://www.newegg.com/p/pl?q=Noctua+NH-D15+140mm&N=100007620',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Noctua+NH-D15+Dual+Tower+CPU+cooler'},
+  'co4':{amz:'https://www.amazon.sa/s?k=Corsair+iCUE+H100i+RGB+AIO+240mm&i=electronics',egg:'https://www.newegg.com/p/pl?q=Corsair+iCUE+H100i+240mm+AIO&N=100007620',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Corsair+iCUE+H100i+RGB+AIO+240mm'},
+  'co5':{amz:'https://www.amazon.sa/s?k=Corsair+iCUE+H150i+RGB+AIO+360mm&i=electronics',egg:'https://www.newegg.com/p/pl?q=Corsair+iCUE+H150i+360mm+AIO&N=100007620',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Corsair+iCUE+H150i+RGB+AIO+360mm'},
+  'co6':{amz:'https://www.amazon.sa/s?k=ASUS+ROG+Ryujin+III+360mm+ARGB+AIO&i=electronics',egg:'https://www.newegg.com/p/pl?q=ASUS+ROG+Ryujin+III+360mm&N=100007620',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=ASUS+ROG+Ryujin+III+360mm+ARGB+AIO'},
+  'p0':{amz:'https://www.amazon.sa/s?k=Corsair+CV550+550W+80+Plus+Bronze&i=electronics',egg:'https://www.newegg.com/p/pl?q=Corsair+CV550+550W+Bronze&N=100007642',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Corsair+CV550+550W+80+Plus+Bronze'},
+  'p1':{amz:'https://www.amazon.sa/s?k=EVGA+GQ+650W+80+Plus+Gold+Semi+Modular&i=electronics',egg:'https://www.newegg.com/p/pl?q=EVGA+GQ+650W+Gold+Semi+Modular&N=100007642',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=EVGA+GQ+650W+80+Plus+Gold+Semi+Modular'},
+  'p2':{amz:'https://www.amazon.sa/s?k=Seasonic+Focus+GX+750W+80+Plus+Gold+Fully+Modular&i=electronics',egg:'https://www.newegg.com/p/pl?q=Seasonic+Focus+GX+750W+Gold&N=100007642',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Seasonic+Focus+GX+750W+Gold+Modular'},
+  'p3':{amz:'https://www.amazon.sa/s?k=Corsair+RM850x+850W+80+Plus+Gold+Fully+Modular&i=electronics',egg:'https://www.newegg.com/p/pl?q=Corsair+RM850x+850W+Gold&N=100007642',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Corsair+RM850x+850W+80+Plus+Gold'},
+  'p4':{amz:'https://www.amazon.sa/s?k=be+quiet+Dark+Power+12+1000W+80+Plus+Platinum&i=electronics',egg:'https://www.newegg.com/p/pl?q=be+quiet+Dark+Power+12+1000W+Platinum&N=100007642',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=be+quiet+Dark+Power+12+1000W+Platinum'},
+  'p5':{amz:'https://www.amazon.sa/s?k=Seasonic+Prime+TX+1000W+80+Plus+Titanium+Fully+Modular&i=electronics',egg:'https://www.newegg.com/p/pl?q=Seasonic+Prime+TX-1000+Titanium&N=100007642',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Seasonic+Prime+TX+1000W+Titanium+Modular'},
+  'p6':{amz:'https://www.amazon.sa/s?k=Corsair+HX1500i+1500W+80+Plus+Platinum&i=electronics',egg:'https://www.newegg.com/p/pl?q=Corsair+HX1500i+1500W+Platinum&N=100007642',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Corsair+HX1500i+1500W+80+Plus+Platinum'},
+  'ca0':{amz:'https://www.amazon.sa/s?k=Cooler+Master+Q300L+Mini+Tower+mATX&i=electronics',egg:'https://www.newegg.com/p/pl?q=Cooler+Master+Q300L+Mini+Tower&N=100007707',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Cooler+Master+Q300L+Mini+Tower+mATX'},
+  'ca1':{amz:'https://www.amazon.sa/s?k=NZXT+H510+Flow+Mid+Tower+ATX&i=electronics',egg:'https://www.newegg.com/p/pl?q=NZXT+H510+Flow+Mid+Tower&N=100007707',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=NZXT+H510+Flow+Mid+Tower+ATX'},
+  'ca2':{amz:'https://www.amazon.sa/s?k=Fractal+Design+Pop+Air+Mid+Tower+ATX&i=electronics',egg:'https://www.newegg.com/p/pl?q=Fractal+Design+Pop+Air+Mid+Tower&N=100007707',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Fractal+Design+Pop+Air+Mid+Tower+ATX'},
+  'ca3':{amz:'https://www.amazon.sa/s?k=Lian+Li+PC-O11+Dynamic+EVO+Mid+Tower+ATX&i=electronics',egg:'https://www.newegg.com/p/pl?q=Lian+Li+O11+Dynamic+EVO+Mid+Tower&N=100007707',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Lian+Li+O11+Dynamic+EVO+Mid+Tower+ATX'},
+  'ca4':{amz:'https://www.amazon.sa/s?k=Phanteks+Eclipse+G500A+Mid+Tower+DRGB&i=electronics',egg:'https://www.newegg.com/p/pl?q=Phanteks+G500A+DRGB+Mid+Tower&N=100007707',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Phanteks+Eclipse+G500A+Mid+Tower+DRGB'},
+  'ca5':{amz:'https://www.amazon.sa/s?k=Corsair+7000D+Airflow+Full+Tower+ATX&i=electronics',egg:'https://www.newegg.com/p/pl?q=Corsair+7000D+Airflow+Full+Tower&N=100007707',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Corsair+7000D+Airflow+Full+Tower+ATX'},
+  'ca6':{amz:'https://www.amazon.sa/s?k=Lian+Li+O11+Vision+Full+Tower+ATX&i=electronics',egg:'https://www.newegg.com/p/pl?q=Lian+Li+O11+Vision+Full+Tower&N=100007707',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Lian+Li+O11+Vision+Full+Tower+ATX'},
+  'ca7':{amz:'https://www.amazon.sa/s?k=Thermaltake+Tower+900+Full+Tower+E-ATX&i=electronics',egg:'https://www.newegg.com/p/pl?q=Thermaltake+Tower+900+Full+Tower&N=100007707',ali:'https://www.aliexpress.com/wholesale?catId=44&SearchText=Thermaltake+Tower+900+Full+Tower+EATX'},
+};
+
+function getLnk(id,store){
+  if(LNKS[id]&&LNKS[id][store]) return LNKS[id][store];
+  var p=find(id);if(!p)return '#';
+  var q=encodeURIComponent(p.nameEn);
+  if(store==='amz') return 'https://www.amazon.sa/s?k='+q+'&i=electronics';
+  if(store==='egg') return 'https://www.newegg.com/p/pl?q='+q+'&N=100007709';
+  return 'https://www.aliexpress.com/wholesale?catId=44&SearchText='+q;
+}
+</script>
+</body>
+</html>
